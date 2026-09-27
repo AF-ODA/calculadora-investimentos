@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Investimentos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #14161A;
+    --surface: #1D2026;
+    --surface-2: #23272E;
+    --border: #2C313A;
+    --text: #E8EAED;
+    --text-2: #A0A6B0;
+    --text-3: #6F7682;
+    --green: #4ADE80;
+    --orange: #FB923C;
+    --blue: #60A5FA;
+    --lilac: #C4B5FD;
+    --purple: #A855F7;
+    --danger: #F87171;
+    --radius: 14px;
+    --sans: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+  }
+  header.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    font: 500 12px/1 var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin: 0 0 10px;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(26px, 3.4vw, 36px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+  }
+  .sub { margin: 8px 0 0; color: var(--text-2); max-width: 60ch; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  /* Formulário */
+  form.inputs {
+    padding: 22px;
+    position: sticky;
+    top: 20px;
+  }
+  @media (max-width: 980px) { form.inputs { position: static; } }
+  .panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin: 0 0 18px;
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    margin-bottom: 7px;
+  }
+  .control {
+    display: flex;
+    align-items: stretch;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .control:focus-within {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(96,165,250,.18);
+  }
+  .field.invalid .control { border-color: var(--danger); }
+  .field.invalid .control:focus-within { box-shadow: 0 0 0 3px rgba(248,113,113,.18); }
+  .affix {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--text-3);
+    font: 500 13px var(--mono);
+    white-space: nowrap;
+  }
+  .control input, .control select {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--text);
+    font: 500 15px var(--mono);
+    padding: 11px 12px;
+  }
+  .control .affix + input { padding-left: 0; }
+  .control select {
+    flex: 0 0 auto;
+    border-left: 1px solid var(--border);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-2);
+    cursor: pointer;
+    padding-right: 8px;
+  }
+  .control select option { background: var(--surface); color: var(--text); }
+  .hint { margin: 6px 0 0; font-size: 12.5px; color: var(--text-3); min-height: 1em; }
+  .error { margin: 6px 0 0; font-size: 12.5px; color: var(--danger); }
+  .error:empty { display: none; }
+
+  .actions { display: flex; gap: 10px; margin-top: 22px; }
+  .btn {
+    flex: 1;
+    font: 600 13.5px var(--sans);
+    padding: 11px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .btn:hover { background: #2A2F37; border-color: #3A404B; }
+  .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .btn.primary { background: rgba(96,165,250,.12); border-color: rgba(96,165,250,.45); color: #CFE3FD; }
+  .btn.primary:hover { background: rgba(96,165,250,.2); }
+
+  .assumptions {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--text-3);
+  }
+  .assumptions strong { color: var(--text-2); font-weight: 600; }
+  .assumptions ul { margin: 6px 0 0; padding-left: 18px; }
+  .assumptions li { margin: 3px 0; }
+
+  /* Dashboard */
+  .dash { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; min-width: 0; }
+  .dash > * { min-width: 0; }
+
+  .hero { padding: 26px 26px 24px; }
+  .hero-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .hero-label { font-size: 13px; color: var(--text-2); margin: 0 0 6px; }
+  .hero-value {
+    font: 600 clamp(34px, 5.4vw, 56px)/1 var(--mono);
+    letter-spacing: -.03em;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-meta { font-size: 13px; color: var(--text-2); text-align: right; }
+  .hero-meta b { font-family: var(--mono); font-weight: 500; color: var(--text); }
+
+  /* Barra de composição (assinatura) */
+  .composition { margin-top: 24px; }
+  .comp-bar {
+    display: flex;
+    gap: 3px;
+    height: 16px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .comp-seg { height: 100%; transition: flex-basis .5s cubic-bezier(.2,.7,.2,1); min-width: 0; }
+  .comp-seg.inv { background: var(--blue); border-radius: 6px 0 0 6px; }
+  .comp-seg.gain { background: var(--green); border-radius: 0 6px 6px 0; }
+  .comp-legend {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-2);
+  }
+  .comp-legend span b { font-family: var(--mono); font-weight: 500; color: var(--text); margin-left: 4px; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 3px; margin-right: 7px; vertical-align: 0; }
+  .dot.inv { background: var(--blue); }
+  .dot.gain { background: var(--green); }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 1180px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 460px) { .kpis { grid-template-columns: 1fr; } }
+  .kpi { padding: 18px 18px 16px; position: relative; overflow: hidden; }
+  .kpi::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 18px; bottom: 18px;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent, var(--border));
+  }
+  .kpi-label { font-size: 12.5px; color: var(--text-2); margin: 0 0 10px; }
+  .kpi-value {
+    font: 600 clamp(19px, 1.9vw, 23px)/1.15 var(--mono);
+    letter-spacing: -.02em;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+  .kpi-foot { margin: 8px 0 0; font-size: 12px; color: var(--text-3); }
+
+  .charts {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1180px) { .charts { grid-template-columns: 1fr; } }
+  .chart-card { padding: 20px 20px 16px; min-width: 0; }
+  .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 16px;
+    margin-bottom: 14px;
+  }
+  .card-head h2 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -.01em; }
+  .card-head p { margin: 2px 0 0; font-size: 12.5px; color: var(--text-3); }
+  .legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--text-2); }
+  .legend .line { display: inline-block; width: 14px; height: 2px; border-radius: 2px; margin-right: 7px; vertical-align: 4px; }
+  .chart-box { position: relative; height: 320px; }
+  @media (max-width: 600px) { .chart-box { height: 260px; } }
+
+  .table-card { padding: 20px 0 8px; }
+  .table-card .card-head { padding: 0 20px; }
+  .table-scroll { overflow-x: auto; max-height: 520px; overflow-y: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 720px; }
+  thead th {
+    position: sticky; top: 0;
+    background: var(--surface);
+    text-align: right;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-2);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  thead th:first-child, tbody td:first-child { text-align: left; }
+  tbody td {
+    text-align: right;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(44,49,58,.6);
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  tbody tr:hover td { background: rgba(255,255,255,.02); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.pos { color: var(--green); }
+  td.strong { font-weight: 600; }
+
+  .empty {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--text-2);
+  }
+  .empty h2 { margin: 0 0 6px; font-size: 18px; color: var(--text); }
+  .empty p { margin: 0; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  @media (max-width: 600px) {
+    .wrap { padding: 22px 16px 40px; }
+    .hero { padding: 20px; }
+    .hero-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Simulador · juros compostos</p>
+      <h1>Calculadora de Investimentos</h1>
+      <p class="sub">Informe o valor inicial, o aporte mensal, o prazo e a taxa. A simulação é refeita a cada alteração.</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <form class="inputs panel" id="form" novalidate autocomplete="off">
+      <h2 class="panel-title">Parâmetros</h2>
+
+      <div class="field" data-field="inicial">
+        <label for="inicial">Valor inicial investido</label>
+        <div class="control">
+          <span class="affix">R$</span>
+          <input id="inicial" name="inicial" inputmode="decimal" aria-describedby="inicial-err">
+        </div>
+        <p class="error" id="inicial-err" role="alert"></p>
+      </div>
+
+      <div class="field" data-field="aporte">
+        <label for="aporte">Aporte mensal</label>
+        <div class="control">
+          <span class="affix">R$</span>
+          <input id="aporte" name="aporte" inputmode="decimal" aria-describedby="aporte-err">
+        </div>
+        <p class="error" id="aporte-err" role="alert"></p>
+      </div>
+
+      <div class="field" data-field="prazo">
+        <label for="prazo">Prazo</label>
+        <div class="control">
+          <input id="prazo" name="prazo" inputmode="numeric" aria-describedby="prazo-err">
+          <span class="affix">anos</span>
+        </div>
+        <p class="error" id="prazo-err" role="alert"></p>
+      </div>
+
+      <div class="field" data-field="taxa">
+        <label for="taxa">Rentabilidade</label>
+        <div class="control">
+          <input id="taxa" name="taxa" inputmode="decimal" aria-describedby="taxa-err taxa-hint">
+          <span class="affix">%</span>
+          <select id="periodo" name="periodo" aria-label="Período da taxa">
+            <option value="ano">ao ano</option>
+            <option value="mes">ao mês</option>
+          </select>
+        </div>
+        <p class="error" id="taxa-err" role="alert"></p>
+        <p class="hint" id="taxa-hint"></p>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn" id="btn-limpar">Limpar</button>
+        <button type="button" class="btn primary" id="btn-restaurar">Restaurar exemplo</button>
+      </div>
+
+      <div class="assumptions">
+        <strong>Premissas do cálculo</strong>
+        <ul>
+          <li>Capitalização mensal. Taxa anual convertida pela equivalência (1 + i<sub>a</sub>)<sup>1/12</sup> − 1.</li>
+          <li>Aportes no fim de cada mês.</li>
+          <li>Valores nominais, sem inflação, IR, IOF ou taxas de administração.</li>
+        </ul>
+      </div>
+    </form>
+
+    <main class="dash" id="dash">
+      <section class="panel empty" id="empty" hidden>
+        <h2>Simulação sem dados</h2>
+        <p id="empty-msg">Preencha os parâmetros ao lado ou clique em “Restaurar exemplo”.</p>
+      </section>
+
+      <div id="results" class="dash">
+        <section class="panel hero" aria-live="polite">
+          <div class="hero-top">
+            <div>
+              <p class="hero-label">Patrimônio final estimado</p>
+              <p class="hero-value" id="h-final">R$ 0,00</p>
+            </div>
+            <div class="hero-meta" id="h-meta"></div>
+          </div>
+          <div class="composition" aria-label="Composição do patrimônio final">
+            <div class="comp-bar">
+              <div class="comp-seg inv" id="seg-inv" style="flex-basis:50%"></div>
+              <div class="comp-seg gain" id="seg-gain" style="flex-basis:50%"></div>
+            </div>
+            <div class="comp-legend">
+              <span><i class="dot inv"></i>Capital aportado<b id="c-inv"></b></span>
+              <span><i class="dot gain"></i>Rendimentos<b id="c-gain"></b></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="kpis">
+          <article class="panel kpi" style="--accent: var(--lilac)">
+            <p class="kpi-label">Patrimônio final</p>
+            <p class="kpi-value" id="k-final"></p>
+            <p class="kpi-foot" id="k-final-foot"></p>
+          </article>
+          <article class="panel kpi" style="--accent: var(--blue)">
+            <p class="kpi-label">Total investido</p>
+            <p class="kpi-value" id="k-inv"></p>
+            <p class="kpi-foot" id="k-inv-foot"></p>
+          </article>
+          <article class="panel kpi" style="--accent: var(--green)">
+            <p class="kpi-label">Total em rendimentos</p>
+            <p class="kpi-value" id="k-gain"></p>
+            <p class="kpi-foot" id="k-gain-foot"></p>
+          </article>
+          <article class="panel kpi" style="--accent: var(--orange)">
+            <p class="kpi-label">Patrimônio vindo dos rendimentos</p>
+            <p class="kpi-value" id="k-pct"></p>
+            <p class="kpi-foot" id="k-pct-foot"></p>
+          </article>
+        </section>
+
+        <section class="charts">
+          <article class="panel chart-card">
+            <div class="card-head">
+              <div>
+                <h2>Evolução do patrimônio</h2>
+                <p>Saldo mês a mês comparado ao capital aportado</p>
+              </div>
+              <div class="legend">
+                <span><i class="line" style="background:var(--green)"></i>Patrimônio</span>
+                <span><i class="line" style="background:var(--blue)"></i>Total investido</span>
+              </div>
+            </div>
+            <div class="chart-box"><canvas id="chart-evo" role="img" aria-label="Gráfico de linhas da evolução do patrimônio e do total investido"></canvas></div>
+          </article>
+
+          <article class="panel chart-card">
+            <div class="card-head">
+              <div>
+                <h2>Investido × rendimentos</h2>
+                <p>Composição do saldo ao fim de cada ano</p>
+              </div>
+              <div class="legend">
+                <span><i class="dot inv"></i>Investido</span>
+                <span><i class="dot gain"></i>Rendimentos</span>
+              </div>
+            </div>
+            <div class="chart-box"><canvas id="chart-comp" role="img" aria-label="Gráfico de barras empilhadas com valor investido e rendimentos acumulados por ano"></canvas></div>
+          </article>
+        </section>
+
+        <section class="panel table-card">
+          <div class="card-head">
+            <div>
+              <h2>Resumo anual</h2>
+              <p>Posição ao fim de cada ano</p>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Ano</th>
+                  <th scope="col">Aportes no ano</th>
+                  <th scope="col">Rendimento no ano</th>
+                  <th scope="col">Total investido</th>
+                  <th scope="col">Rendimentos acumulados</th>
+                  <th scope="col">Patrimônio</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const EXEMPLO = { inicial: "10.000,00", aporte: "1.000,00", prazo: "20", taxa: "10,00", periodo: "ano" };
+  const LIMITES = {
+    inicial: 1e12,
+    aporte: 1e10,
+    prazoMax: 100,
+    taxaAno: 100,
+    taxaMes: 10
+  };
+
+  const COR = {
+    green: "#4ADE80", blue: "#60A5FA", text2: "#A0A6B0", text3: "#6F7682",
+    grid: "rgba(44,49,58,.7)", surface: "#1D2026"
+  };
+
+  const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  const brlCompact = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 });
+  const num2 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const pct = (v, d = 2) => new Intl.NumberFormat("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }).format(v) + "%";
+
+  const $ = (id) => document.getElementById(id);
+  const campos = { inicial: $("inicial"), aporte: $("aporte"), prazo: $("prazo"), taxa: $("taxa"), periodo: $("periodo") };
+
+  // Converte texto no padrão brasileiro (1.234,56) em número. Vazio -> null.
+  function parseBR(txt) {
+    const s = String(txt).trim().replace(/\s|R\$|%/g, "");
+    if (s === "") return null;
+    if (!/^-?[\d.]*,?\d*$/.test(s)) return NaN;
+    const n = Number(s.replace(/\./g, "").replace(",", "."));
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  function setErro(nome, msg) {
+    const field = document.querySelector('[data-field="' + nome + '"]');
+    field.classList.toggle("invalid", !!msg);
+    campos[nome].setAttribute("aria-invalid", msg ? "true" : "false");
+    $(nome + "-err").textContent = msg || "";
+  }
+
+  function validar() {
+    const v = {
+      inicial: parseBR(campos.inicial.value),
+      aporte: parseBR(campos.aporte.value),
+      prazo: parseBR(campos.prazo.value),
+      taxa: parseBR(campos.taxa.value),
+      periodo: campos.periodo.value
+    };
+    const erros = {};
+
+    if (v.inicial === null) erros.inicial = "Informe o valor inicial (use 0 se não houver).";
+    else if (Number.isNaN(v.inicial)) erros.inicial = "Use apenas números, no formato 10.000,00.";
+    else if (v.inicial < 0) erros.inicial = "O valor não pode ser negativo.";
+    else if (v.inicial > LIMITES.inicial) erros.inicial = "Valor acima do limite de R$ 1 trilhão.";
+
+    if (v.aporte === null) erros.aporte = "Informe o aporte mensal (use 0 se não houver).";
+    else if (Number.isNaN(v.aporte)) erros.aporte = "Use apenas números, no formato 1.000,00.";
+    else if (v.aporte < 0) erros.aporte = "O aporte não pode ser negativo.";
+    else if (v.aporte > LIMITES.aporte) erros.aporte = "Aporte acima do limite de R$ 10 bilhões.";
+
+    if (v.prazo === null) erros.prazo = "Informe o prazo em anos.";
+    else if (Number.isNaN(v.prazo) || !Number.isInteger(v.prazo)) erros.prazo = "Informe um número inteiro de anos.";
+    else if (v.prazo < 1 || v.prazo > LIMITES.prazoMax) erros.prazo = "O prazo deve ficar entre 1 e " + LIMITES.prazoMax + " anos.";
+
+    const maxTaxa = v.periodo === "ano" ? LIMITES.taxaAno : LIMITES.taxaMes;
+    if (v.taxa === null) erros.taxa = "Informe a taxa de rendimento.";
+    else if (Number.isNaN(v.taxa)) erros.taxa = "Use apenas números, no formato 10,50.";
+    else if (v.taxa < 0) erros.taxa = "A taxa não pode ser negativa.";
+    else if (v.taxa > maxTaxa) erros.taxa = "A taxa deve ficar entre 0% e " + maxTaxa + "% " + (v.periodo === "ano" ? "ao ano." : "ao mês.");
+
+    if (!erros.inicial && !erros.aporte && v.inicial === 0 && v.aporte === 0) {
+      erros.aporte = "Informe valor inicial ou aporte mensal maior que zero.";
+    }
+
+    ["inicial", "aporte", "prazo", "taxa"].forEach((k) => setErro(k, erros[k]));
+    return { ok: Object.keys(erros).length === 0, v, erros };
+  }
+
+  function taxaMensal(taxa, periodo) {
+    const i = taxa / 100;
+    return periodo === "ano" ? Math.pow(1 + i, 1 / 12) - 1 : i;
+  }
+
+  function simular({ inicial, aporte, prazo, taxa, periodo }) {
+    const im = taxaMensal(taxa, periodo);
+    const meses = prazo * 12;
+    let saldo = inicial;
+    let investido = inicial;
+    const mensal = [{ mes: 0, saldo, investido }];
+    const anual = [];
+    let saldoIniAno = saldo, aportesAno = 0;
+
+    for (let m = 1; m <= meses; m++) {
+      saldo = saldo * (1 + im) + aporte;
+      investido += aporte;
+      aportesAno += aporte;
+      mensal.push({ mes: m, saldo, investido });
+      if (m % 12 === 0) {
+        anual.push({
+          ano: m / 12,
+          aportes: aportesAno,
+          rendAno: saldo - saldoIniAno - aportesAno,
+          investido,
+          rendAcum: saldo - investido,
+          saldo
+        });
+        saldoIniAno = saldo;
+        aportesAno = 0;
+      }
+    }
+    const rend = saldo - investido;
+    return {
+      im, mensal, anual,
+      final: saldo, investido, rend,
+      pctRend: saldo > 0 ? (rend / saldo) * 100 : 0
+    };
+  }
+
+  // ---------- Gráficos ----------
+  Chart.defaults.font.family = '"Instrument Sans", "Segoe UI", system-ui, sans-serif';
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = COR.text2;
+
+  const tooltipBase = {
+    backgroundColor: "#0F1114",
+    borderColor: "#2C313A",
+    borderWidth: 1,
+    titleColor: "#E8EAED",
+    bodyColor: "#E8EAED",
+    footerColor: "#A0A6B0",
+    padding: 12,
+    cornerRadius: 8,
+    boxWidth: 8, boxHeight: 8, boxPadding: 6, usePointStyle: true,
+    titleFont: { weight: "600" },
+    bodyFont: { family: '"IBM Plex Mono", Consolas, monospace' },
+    footerFont: { family: '"IBM Plex Mono", Consolas, monospace', weight: "500" }
+  };
+
+  const eixoY = {
+    beginAtZero: true,
+    border: { display: false },
+    grid: { color: COR.grid, drawTicks: false },
+    ticks: { padding: 10, maxTicksLimit: 6, callback: (v) => brlCompact.format(v) }
+  };
+
+  function passoAnos(prazo) {
+    if (prazo <= 12) return 1;
+    if (prazo <= 25) return 2;
+    if (prazo <= 60) return 5;
+    return 10;
+  }
+
+  let chartEvo = null, chartComp = null;
+
+  function gradiente(ctx, area, cor) {
+    const g = ctx.createLinearGradient(0, area.top, 0, area.bottom);
+    g.addColorStop(0, cor + "40");
+    g.addColorStop(1, cor + "00");
+    return g;
+  }
+
+  function criarGraficos() {
+    chartEvo = new Chart($("chart-evo"), {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: "Patrimônio", data: [], borderColor: COR.green, borderWidth: 2,
+            pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: COR.green,
+            pointHoverBorderColor: COR.surface, pointHoverBorderWidth: 2, tension: 0.25, fill: true,
+            backgroundColor: (c) => c.chart.chartArea ? gradiente(c.chart.ctx, c.chart.chartArea, COR.green) : "transparent"
+          },
+          {
+            label: "Total investido", data: [], borderColor: COR.blue, borderWidth: 2,
+            pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: COR.blue,
+            pointHoverBorderColor: COR.surface, pointHoverBorderWidth: 2, tension: 0, fill: true,
+            backgroundColor: (c) => c.chart.chartArea ? gradiente(c.chart.ctx, c.chart.chartArea, COR.blue) : "transparent"
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 350 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            ...tooltipBase,
+            callbacks: {
+              title: (items) => {
+                const m = items[0].dataIndex;
+                const a = Math.floor(m / 12), r = m % 12;
+                if (m === 0) return "Início";
+                return "Mês " + m + " · " + (a ? a + (a > 1 ? " anos" : " ano") : "") + (a && r ? " e " : "") + (r ? r + (r > 1 ? " meses" : " mês") : "");
+              },
+              label: (i) => " " + i.dataset.label + ": " + brl.format(i.parsed.y),
+              footer: (items) => {
+                const p = items.find((i) => i.datasetIndex === 0), v = items.find((i) => i.datasetIndex === 1);
+                return p && v ? "Rendimentos: " + brl.format(p.parsed.y - v.parsed.y) : "";
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: "Anos", color: COR.text3, padding: { top: 6 } },
+            border: { color: "#2C313A" },
+            grid: { display: false },
+            ticks: {
+              autoSkip: false, maxRotation: 0, padding: 8,
+              callback: function (val, idx) {
+                const passo = passoAnos(this.chart.$prazo || 1) * 12;
+                return idx % passo === 0 ? String(idx / 12) : null;
+              }
+            }
+          },
+          y: eixoY
+        }
+      }
+    });
+
+    chartComp = new Chart($("chart-comp"), {
+      type: "bar",
+      data: {
+        labels: [],
+        datasets: [
+          { label: "Investido", data: [], backgroundColor: COR.blue, borderColor: COR.surface, borderWidth: { top: 2 }, borderSkipped: false, borderRadius: { bottomLeft: 4, bottomRight: 4 }, stack: "s" },
+          { label: "Rendimentos", data: [], backgroundColor: COR.green, borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false, stack: "s" }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: { duration: 350 },
+        interaction: { mode: "index", intersect: false },
+        datasets: { bar: { categoryPercentage: 0.78, barPercentage: 0.9, maxBarThickness: 36 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            ...tooltipBase,
+            callbacks: {
+              title: (items) => "Fim do ano " + items[0].label,
+              label: (i) => " " + i.dataset.label + ": " + brl.format(i.parsed.y),
+              footer: (items) => "Patrimônio: " + brl.format(items.reduce((s, i) => s + i.parsed.y, 0))
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            title: { display: true, text: "Anos", color: COR.text3, padding: { top: 6 } },
+            border: { color: "#2C313A" },
+            grid: { display: false },
+            ticks: {
+              autoSkip: false, maxRotation: 0, padding: 8,
+              callback: function (val, idx) {
+                const ano = idx + 1, passo = passoAnos(this.chart.$prazo || 1);
+                return ano % passo === 0 ? String(ano) : null;
+              }
+            }
+          },
+          y: { ...eixoY, stacked: true }
+        }
+      }
+    });
+  }
+
+  // ---------- Renderização ----------
+  function render(r, v) {
+    $("h-final").textContent = brl.format(r.final);
+    $("h-meta").innerHTML =
+      "<b>" + v.prazo + "</b> " + (v.prazo > 1 ? "anos" : "ano") + " · <b>" + (v.prazo * 12) + "</b> meses<br>" +
+      "Taxa mensal equivalente <b>" + pct(r.im * 100, 4) + "</b>";
+
+    const pInv = r.final > 0 ? (r.investido / r.final) * 100 : 100;
+    $("seg-inv").style.flexBasis = pInv + "%";
+    $("seg-gain").style.flexBasis = (100 - pInv) + "%";
+    $("seg-gain").hidden = r.rend <= 0;
+    $("seg-inv").style.borderRadius = r.rend <= 0 ? "6px" : "";
+    $("c-inv").textContent = pct(pInv, 1);
+    $("c-gain").textContent = pct(100 - pInv, 1);
+
+    $("k-final").textContent = brl.format(r.final);
+    $("k-final-foot").textContent = "Multiplica o capital aportado por " + num2.format(r.investido > 0 ? r.final / r.investido : 0) + "×";
+    $("k-inv").textContent = brl.format(r.investido);
+    $("k-inv-foot").textContent = brl.format(v.inicial) + " inicial + " + (v.prazo * 12) + " aportes";
+    $("k-gain").textContent = brl.format(r.rend);
+    $("k-gain-foot").textContent = "Retorno de " + pct(r.investido > 0 ? (r.rend / r.investido) * 100 : 0, 1) + " sobre o investido";
+    $("k-pct").textContent = pct(r.pctRend, 1);
+    const cruzamento = r.anual.find((a) => a.rendAcum >= a.investido);
+    $("k-pct-foot").textContent = cruzamento
+      ? "Rendimentos superam o investido no ano " + cruzamento.ano
+      : "Rendimentos ainda abaixo do capital aportado";
+
+    // Evolução mensal
+    chartEvo.$prazo = v.prazo;
+    chartEvo.data.labels = r.mensal.map((p) => p.mes);
+    chartEvo.data.datasets[0].data = r.mensal.map((p) => p.saldo);
+    chartEvo.data.datasets[1].data = r.mensal.map((p) => p.investido);
+    chartEvo.update();
+
+    // Composição anual
+    chartComp.$prazo = v.prazo;
+    chartComp.data.labels = r.anual.map((a) => a.ano);
+    chartComp.data.datasets[0].data = r.anual.map((a) => a.investido);
+    chartComp.data.datasets[1].data = r.anual.map((a) => a.rendAcum);
+    chartComp.update();
+
+    // Tabela
+    const linhas = r.anual.map((a) =>
+      "<tr>" +
+        "<td>" + a.ano + "</td>" +
+        "<td>" + brl.format(a.aportes) + "</td>" +
+        '<td class="pos">' + brl.format(a.rendAno) + "</td>" +
+        "<td>" + brl.format(a.investido) + "</td>" +
+        '<td class="pos">' + brl.format(a.rendAcum) + "</td>" +
+        '<td class="strong">' + brl.format(a.saldo) + "</td>" +
+      "</tr>"
+    );
+    $("tbody").innerHTML = linhas.join("");
+  }
+
+  function atualizarHintTaxa(v) {
+    const hint = $("taxa-hint");
+    if (v.taxa === null || Number.isNaN(v.taxa) || v.taxa < 0) { hint.textContent = ""; return; }
+    if (v.periodo === "ano") {
+      hint.textContent = "Equivale a " + pct(taxaMensal(v.taxa, "ano") * 100, 4) + " ao mês.";
+    } else {
+      hint.textContent = "Equivale a " + pct((Math.pow(1 + v.taxa / 100, 12) - 1) * 100, 2) + " ao ano.";
+    }
+  }
+
+  function recalcular() {
+    const { ok, v } = validar();
+    atualizarHintTaxa(v);
+    const vazio = ["inicial", "aporte", "prazo", "taxa"].every((k) => campos[k].value.trim() === "");
+    $("results").hidden = !ok;
+    $("empty").hidden = ok;
+    $("empty-msg").textContent = vazio
+      ? "Preencha os parâmetros ao lado ou clique em “Restaurar exemplo”."
+      : "Corrija os campos destacados para ver a simulação.";
+    if (ok) render(simular(v), v);
+    salvar();
+  }
+
+  // ---------- Persistência local (conveniência) ----------
+  const CHAVE = "calc-invest-v1";
+  function salvar() {
+    try {
+      const d = {};
+      Object.keys(campos).forEach((k) => (d[k] = campos[k].value));
+      localStorage.setItem(CHAVE, JSON.stringify(d));
+    } catch (e) { /* armazenamento indisponível */ }
+  }
+  function carregar() {
+    try {
+      const d = JSON.parse(localStorage.getItem(CHAVE) || "null");
+      if (d && typeof d === "object") return d;
+    } catch (e) { /* ignora */ }
+    return null;
+  }
+  function preencher(d) {
+    Object.keys(campos).forEach((k) => { if (d[k] !== undefined) campos[k].value = d[k]; });
+  }
+
+  // Formata valores monetários e taxa ao sair do campo
+  function formatarAoSair(nome) {
+    const n = parseBR(campos[nome].value);
+    if (n !== null && !Number.isNaN(n)) campos[nome].value = num2.format(n);
+  }
+
+  let timer = null;
+  function agendar() {
+    clearTimeout(timer);
+    timer = setTimeout(recalcular, 120);
+  }
+
+  // ---------- Inicialização ----------
+  if (typeof Chart === "undefined") {
+    $("results").hidden = true;
+    $("empty").hidden = false;
+    $("empty").querySelector("h2").textContent = "Gráficos indisponíveis";
+    $("empty-msg").textContent = "Não foi possível carregar a biblioteca de gráficos. Verifique a conexão com a internet e recarregue a página.";
+    return;
+  }
+
+  criarGraficos();
+
+  Object.keys(campos).forEach((k) => {
+    campos[k].addEventListener("input", agendar);
+    campos[k].addEventListener("change", agendar);
+  });
+  ["inicial", "aporte", "taxa"].forEach((k) =>
+    campos[k].addEventListener("blur", () => formatarAoSair(k))
+  );
+  $("form").addEventListener("submit", (e) => e.preventDefault());
+
+  $("btn-limpar").addEventListener("click", () => {
+    ["inicial", "aporte", "prazo", "taxa"].forEach((k) => (campos[k].value = ""));
+    campos.periodo.value = "ano";
+    recalcular();
+    ["inicial", "aporte", "prazo", "taxa"].forEach((k) => setErro(k, ""));
+    campos.inicial.focus();
+  });
+  $("btn-restaurar").addEventListener("click", () => {
+    preencher(EXEMPLO);
+    recalcular();
+  });
+
+  preencher(carregar() || EXEMPLO);
+  recalcular();
+})();
+</script>
+</body>
+</html>
