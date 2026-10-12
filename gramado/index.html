@@ -1,0 +1,740 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Gramado 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Grenze:wght@500;600;700&display=swap">
+<style>
+/* Layout: app de bolso, uma coluna de ~640px, cabeçalho curto, barra de abas fixa no rodapé. Tema escuro como padrão. */
+:root{
+  color-scheme: dark;
+  --bg:#14161A; --sup:#1D2026; --sup2:#23272E; --borda:#2C313A;
+  --tx:#E8EAED; --tx2:#A0A6B0;
+  --verde:#4ADE80; --laranja:#FB923C; --azul:#60A5FA; --lilas:#C4B5FD; --roxo:#A855F7;
+  --verde-f:rgba(74,222,128,.12); --laranja-f:rgba(251,146,60,.13); --roxo-f:rgba(168,85,247,.14); --azul-f:rgba(96,165,250,.12); --lilas-f:rgba(196,181,253,.12);
+  --f-disp:"Grenze", "Palatino Linotype", Georgia, serif;
+  --f-txt:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    color-scheme: light;
+    --bg:#F4F5F7; --sup:#FFFFFF; --sup2:#EEF0F3; --borda:#D7DBE1;
+    --tx:#16181C; --tx2:#5A616C;
+    --verde:#15803D; --laranja:#C2410C; --azul:#1D4ED8; --lilas:#6D28D9; --roxo:#7E22CE;
+    --verde-f:rgba(21,128,61,.10); --laranja-f:rgba(194,65,12,.10); --roxo-f:rgba(126,34,206,.10); --azul-f:rgba(29,78,216,.09); --lilas-f:rgba(109,40,217,.08);
+  }
+}
+:root[data-theme="light"]{
+  color-scheme: light;
+  --bg:#F4F5F7; --sup:#FFFFFF; --sup2:#EEF0F3; --borda:#D7DBE1;
+  --tx:#16181C; --tx2:#5A616C;
+  --verde:#15803D; --laranja:#C2410C; --azul:#1D4ED8; --lilas:#6D28D9; --roxo:#7E22CE;
+  --verde-f:rgba(21,128,61,.10); --laranja-f:rgba(194,65,12,.10); --roxo-f:rgba(126,34,206,.10); --azul-f:rgba(29,78,216,.09); --lilas-f:rgba(109,40,217,.08);
+}
+
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--tx);font-family:var(--f-txt);font-size:16.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:18px calc(96px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:var(--f-disp);font-weight:600;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:2.3rem;letter-spacing:.005em}
+h2{font-size:1.7rem}
+h3{font-size:1.25rem}
+p{margin:0}
+.eyebrow{font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--tx2);font-weight:700}
+.sec{color:var(--tx2)}
+.num{font-variant-numeric:tabular-nums}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+header.top .alt{font-size:.82rem;color:var(--tx2);text-align:right}
+.aviso{font-size:.88rem;color:var(--tx2);border:1px dashed var(--borda);border-radius:var(--r);padding:10px 12px;margin-bottom:16px}
+.aviso.ed{border-style:solid;border-color:var(--roxo);color:var(--tx);background:var(--roxo-f)}
+
+/* abas */
+nav.abas{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--sup);border-top:1px solid var(--borda);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.abas .in{max-width:640px;margin:0 auto;display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
+nav.abas button{background:none;border:0;padding:11px 2px 12px;font-size:.84rem;color:var(--tx2);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav.abas button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7}
+nav.abas button[aria-current="true"]{color:var(--tx);font-weight:700}
+nav.abas button[aria-current="true"] svg{stroke:var(--verde)}
+
+/* blocos */
+.bloco{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--sup);border:1px solid var(--borda);border-radius:var(--r);padding:16px}
+.grade2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.grade2{grid-template-columns:1fr}}
+
+/* hoje */
+.agora{background:var(--sup);border:1px solid var(--borda);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px}
+.agora .hora{font-family:var(--f-disp);font-size:2.6rem;line-height:1;font-weight:600}
+.agora .oq{font-size:1.15rem;font-weight:700}
+.cont{display:inline-flex;align-items:baseline;gap:6px;font-size:.95rem;color:var(--tx2)}
+.cont b{color:var(--verde);font-size:1.1rem}
+.contagem{font-family:var(--f-disp);font-size:4.2rem;line-height:.95;font-weight:600;color:var(--laranja)}
+
+/* linha do tempo */
+.dia-cab{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.periodo{border-top:1px solid var(--borda);padding-top:14px;display:flex;flex-direction:column;gap:10px}
+.periodo:first-of-type{border-top:0;padding-top:0}
+.per-cab{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.per-cab .eyebrow{display:flex;gap:8px;align-items:center}
+.pill{display:inline-block;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--roxo-f);color:var(--roxo)}
+.pill.chuva{background:var(--azul-f);color:var(--azul)}
+.itens{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.item{display:grid;grid-template-columns:58px 1fr auto;gap:10px;align-items:start;padding:8px 0}
+.item .h{font-variant-numeric:tabular-nums;font-weight:700;padding-top:1px}
+.item .tp{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:1px}
+.k-comer .tp{color:var(--lilas)} .k-natal .tp{color:var(--laranja)} .k-viagem .tp{color:var(--azul)} .k-passeio .tp{color:var(--verde)} .k-livre .tp{color:var(--tx2)}
+.item.feito .t{color:var(--tx2)}
+.item.feito .t .nome::after{content:" ✓";color:var(--verde)}
+.item.cancelado .t .nome{text-decoration:line-through;color:var(--tx2)}
+.item.atual{background:var(--verde-f);border-radius:8px;padding-inline:8px;margin-inline:-8px}
+.rest-esc{font-weight:700}
+.rest-opc{color:var(--tx2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{border:1px solid var(--borda);background:var(--sup2);border-radius:999px;padding:4px 11px;font-size:.84rem;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--lilas);background:var(--lilas-f);color:var(--tx);font-weight:700}
+.check{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--borda);background:none;cursor:pointer;display:grid;place-items:center;color:transparent}
+.check[aria-pressed="true"]{border-color:var(--verde);background:var(--verde-f);color:var(--verde)}
+.det{font-size:.88rem;color:var(--tx2);display:grid;grid-template-columns:auto 1fr;gap:3px 10px}
+.det dt{font-weight:700;color:var(--tx2)} .det dd{margin:0}
+.obs{font-size:.9rem;border-left:2px solid var(--laranja);padding-left:10px}
+.nota{font-size:.92rem;background:var(--roxo-f);border-radius:8px;padding:8px 10px}
+.acoes{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--borda);background:var(--sup2);border-radius:8px;padding:7px 13px;font-size:.88rem;cursor:pointer}
+.btn.pri{background:var(--verde);border-color:var(--verde);color:#0B1A10;font-weight:700}
+.btn.alerta{border-color:var(--laranja);color:var(--laranja)}
+.btn.peq{padding:4px 10px;font-size:.82rem}
+.chuva-box{background:var(--azul-f);border-radius:var(--r);padding:12px 14px;font-size:.92rem;display:flex;flex-direction:column;gap:8px}
+.chuva-box b{color:var(--azul)}
+
+/* seletor de dias */
+.dias{display:grid;grid-template-columns:repeat(8,minmax(42px,1fr));gap:6px;overflow-x:auto;padding-bottom:4px}
+.dias button{border:1px solid var(--borda);background:var(--sup);border-radius:8px;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.dias button small{font-size:.68rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em}
+.dias button b{font-family:var(--f-disp);font-size:1.35rem;font-weight:600}
+.dias button[aria-current="true"]{border-color:var(--verde);background:var(--verde-f)}
+.dias button.hoje small{color:var(--verde);font-weight:700}
+
+/* lugares */
+.seg{display:inline-flex;border:1px solid var(--borda);border-radius:999px;padding:3px;background:var(--sup)}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--tx2)}
+.seg button[aria-pressed="true"]{background:var(--sup2);color:var(--tx);font-weight:700}
+.lugar{display:flex;flex-direction:column;gap:6px}
+.lugar .cab{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.lugar .nota-g{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.lugar .usado{font-size:.82rem;color:var(--lilas);font-weight:700}
+.tag{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--tx2)}
+.tag.ok{color:var(--verde)}
+
+/* gastos */
+.metrica{display:flex;flex-direction:column;gap:4px}
+.metrica .v{font-family:var(--f-disp);font-size:1.9rem;font-weight:600;line-height:1}
+.barra{position:relative;height:10px;border-radius:5px;background:var(--sup2);overflow:hidden}
+.barra i{position:absolute;left:0;top:0;bottom:0;background:var(--verde);border-radius:5px}
+.barra i.alto{background:var(--laranja)}
+.barra s{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--tx2)}
+.cat{display:flex;flex-direction:column;gap:6px}
+.cat .lin{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;flex-wrap:wrap}
+form.gasto{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+form.gasto .full{grid-column:1/-1}
+@media (max-width:420px){form.gasto{grid-template-columns:1fr}}
+label.campo{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--tx2);font-weight:700}
+.inp{background:var(--bg);border:1px solid var(--borda);border-radius:8px;padding:9px 10px;font-size:1rem;width:100%;color:var(--tx);font-weight:400}
+.lanc{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px 0;border-top:1px solid var(--borda)}
+.lanc .val{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.lanc .meta{font-size:.82rem;color:var(--tx2)}
+
+/* tabelas */
+.tabw{overflow-x:auto;border:1px solid var(--borda);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--borda);vertical-align:top}
+th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--tx2);background:var(--sup2)}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+ul.lista{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.fone{font-variant-numeric:tabular-nums;font-weight:700;user-select:all}
+
+/* diálogo */
+dialog{border:1px solid var(--borda);border-radius:14px;background:var(--sup);color:var(--tx);padding:0;width:min(600px,calc(100vw - 24px));max-height:calc(100dvh - 40px)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.dlg{padding:18px;display:flex;flex-direction:column;gap:14px}
+.ed-item{border:1px solid var(--borda);border-radius:var(--r);padding:12px;display:grid;grid-template-columns:90px 1fr;gap:8px}
+.ed-item .full{grid-column:1/-1}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:.9rem;z-index:40;max-width:calc(100vw - 32px)}
+@media (prefers-reduced-motion:no-preference){.toast{transition:opacity .2s}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Serra Gaúcha · Natal Luz</div>
+      <h1>Gramado 2026</h1>
+    </div>
+    <div class="alt num">01 a 08/11/2026<br>5 viajantes · Bavária Sport Hotel</div>
+  </header>
+  <div id="aviso"></div>
+  <main id="view"></main>
+</div>
+
+<nav class="abas" aria-label="Seções">
+  <div class="in">
+    <button type="button" data-act="tab" data-v="hoje"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>Hoje</button>
+    <button type="button" data-act="tab" data-v="roteiro"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Roteiro</button>
+    <button type="button" data-act="tab" data-v="lugares"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>Lugares</button>
+    <button type="button" data-act="tab" data-v="gastos"><svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M3.5 10h17M7 14.5h4"/></svg>Gastos</button>
+    <button type="button" data-act="tab" data-v="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.2"/></svg>Info</button>
+  </div>
+</nav>
+
+<dialog id="dlg"><div class="dlg" id="dlg-in"></div></dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ===================== DADOS DO ROTEIRO (AF_LAST_Roteiro_Gramado, 12/10/2026) ===================== */
+const ESTATICO = {"aj":{},"dias":{},"gastos":[],"quando":"12/10/2026 às 00h18","semGastos":true};
+const PER = {manha:"Manhã", tarde:"Tarde", noite:"Noite"};
+const PER_MIN = {manha:9*60, tarde:13*60, noite:19*60};
+
+const DIAS = [
+ {id:"d01", data:"2026-11-01", sem:"Dom", tit:"Chegada", slots:{
+  manha:{itens:[{h:"",t:"Sem atividade em Gramado"}], obs:"Janela indisponível: viagem à tarde."},
+  tarde:{itens:[{h:"15h30",t:"Voo G3 2090, Galeão → Porto Alegre, chegada às 17h40"}], desl:"Voo direto, 2h10", custo:"Já contratado", seg:"Aeroporto Salgado Filho: moderado", obs:"Ir direto ao ponto de encontro do transfer e recusar ofertas de táxi ou motorista."},
+  noite:{itens:[{h:"17h40",t:"Pouso e transfer em van até o hotel"},{h:"20h30",t:"Check-in no Bavária Sport Hotel (horário estimado)"},{h:"21h00",t:"Jantar",rest:[1,2]}], desl:"Van contratada, cerca de 2h; depois aplicativo, 2 carros, 3 min", custo:"Transfer já contratado; jantar R$ 499,50 a R$ 912,00; aplicativo a partir de R$ 60,00", seg:"Estrada à noite: baixo; centro: moderado", obs:"A Cantina Di Capo serve até 23h30."}
+ }},
+ {id:"d02", data:"2026-11-02", sem:"Seg", tit:"Finados, caminhada e Acendimento", slots:{
+  manha:{itens:[{h:"",t:"Caminhada fotográfica: Lago Negro, Rua Coberta e Praça das Etnias"}], desl:"A pé: 19 min até o lago e cerca de 1 km até o centro", custo:"R$ 0,00", seg:"Baixo", obs:"Feriado de Finados. Luz de amanhecer no lago entre 05h30 e 07h00."},
+  tarde:{itens:[{h:"12h00",t:"Almoço",rest:[3,4]},{h:"",t:"Descanso no hotel"}], desl:"A pé, 15 min até o Alecrim Santo; volta de aplicativo", custo:"Almoço R$ 200,00 a R$ 400,00; aplicativo a partir de R$ 30,00", seg:"Baixo", obs:"Funcionamento no feriado não confirmado. Os dois abriam das 11h30 às 14h30 em 12/10, também feriado."},
+  noite:{itens:[{h:"19h00",t:"Jantar",rest:[5,6]},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"}], desl:"Aplicativo, 2 carros, 3 min; Palácio a pé", custo:"Jantar R$ 300,00 a R$ 1.000,00; Acendimento R$ 0,00; aplicativo a partir de R$ 60,00", seg:"Centro: moderado à noite", obs:"Em 12/10, feriado, o Gaúcho Grill abria até 21h00 e o Gramado & Brasa até 23h00."}
+ }},
+ {id:"d03", data:"2026-11-03", sem:"Ter", tit:"Alpen Park e Canela", slots:{
+  manha:{itens:[{h:"09h00",t:"Alpen Park, em Canela, até 13h00"}], desl:"Aplicativo, 2 carros, 18 min", custo:"Passaporte R$ 446,70 para os três de 1,30 m (referência); aplicativo a partir de R$ 120,00", seg:"Baixo de dia", obs:"Troca do voucher até as 14h00. Os avós acompanham sem passaporte."},
+  tarde:{itens:[{h:"13h30",t:"Almoço em Canela",rest:[7,8]},{h:"",t:"Catedral de Pedra e centro de Canela até o pôr do sol"}], desl:"Aplicativo, 2 carros, 10 min desde o Alpen Park", custo:"Almoço R$ 200,00 a R$ 1.000,00; Catedral R$ 0,00; aplicativo a partir de R$ 60,00", seg:"Baixo de dia", obs:"Melhor luz para fotos na Catedral: 17h30 às 18h45."},
+  noite:{itens:[{h:"20h30",t:"Jantar",rest:[13,6]}], desl:"Aplicativo, 2 carros, Canela → hotel, 14 min; depois 3 min", custo:"Jantar R$ 100,00 a R$ 1.000,00; aplicativo a partir de R$ 120,00", seg:"Centro: moderado à noite", obs:"Famiglia Guimarães, Chama de Fogo e La Braise fecham às terças."}
+ }},
+ {id:"d04", data:"2026-11-04", sem:"Qua", tit:"Jolimont, Felsen e Hector", slots:{
+  manha:{itens:[{h:"10h00",t:"Tour Jolimont, na Vinícola Jolimont, em Canela (só os pais; agendamento prévio)"}], desl:"Aplicativo, 1 carro, 23 min", custo:"Tour R$ 298,00 para 2 adultos; aplicativo a partir de R$ 60,00", seg:"Baixo de dia", obs:"A adolescente fica com os avós no hotel. Duração não confirmada: confirmar no agendamento."},
+  tarde:{itens:[{h:"12h30",t:"Almoço",rest:[10,23]},{h:"15h00",t:"Cervejaria Felsen, Beer Tour (só os pais)"}], desl:"Aplicativo, 2 carros, 10 min até a Casa Figueira; 1 carro, 9 min até a Felsen", custo:"Almoço R$ 400,00 a R$ 625,00; Beer Tour R$ 158,00 para 2 adultos; aplicativo a partir de R$ 90,00", seg:"Baixo de dia", obs:"A Casa Figueira serve só até 13h30. A adolescente não vai a cervejarias."},
+  noite:{itens:[{h:"18h30",t:"Palco Rua Coberta"},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"},{h:"20h45",t:"Jantar",rest:[22]}], desl:"Ida a pé, 21 min; Hector a pé desde o Palácio; volta de aplicativo, 2 carros, 3 min", custo:"Programação R$ 0,00; Hector R$ 1.449,50; aplicativo a partir de R$ 30,00", seg:"Centro: moderado à noite", obs:"Hector: sessão das 20h45, com reserva antecipada."}
+ }},
+ {id:"d05", data:"2026-11-05", sem:"Qui", tit:"NBA Park e Nativitaten", slots:{
+  manha:{itens:[{h:"10h00",t:"NBA Park, até 12h15: a adolescente e os avós. Os pais ficam livres"}], desl:"Aplicativo, 1 carro, 8 min", custo:"Ingressos R$ 373,50; aplicativo a partir de R$ 30,00", seg:"Baixo de dia", obs:"Menor de 16 anos só entra acompanhado de responsável maior de 18."},
+  tarde:{itens:[{h:"12h45",t:"Almoço",rest:[13,14]},{h:"15h00",t:"Hard Rock Cafe: café e instalações, grupo inteiro"},{h:"16h30",t:"Adega Bertolucci (só os pais)"}], desl:"A pé, de 3 a 24 min; aplicativo, 2 carros, 3 min", custo:"Almoço R$ 100,00 a R$ 200,00; café R$ 250,00 (estimativa); Bertolucci sem entrada; aplicativo a partir de R$ 60,00", seg:"Baixo de dia", obs:"O Hard Rock cobra 12% de taxa de serviço."},
+  noite:{itens:[{h:"20h00",t:"Nativitaten, no Serra Park"},{h:"21h30",t:"Jantar",rest:[15,2]}], desl:"Aplicativo, 2 carros: hotel → Serra Park, 9 min; Serra Park → restaurante, 7 a 8 min; restaurante → hotel, 3 min", custo:"Nativitaten R$ 1.260,00; jantar R$ 602,00 a R$ 912,00; aplicativo a partir de R$ 90,00", seg:"Moderado na saída do espetáculo", obs:"Espetáculo ao ar livre: levar agasalho."}
+ }},
+ {id:"d06", data:"2026-11-06", sem:"Sex", tit:"Parque Olivas e fondue", slots:{
+  manha:{itens:[{h:"",t:"Tempo livre; piscinas e spa do hotel"}], obs:"Período reserva para chuva."},
+  tarde:{itens:[{h:"14h00",t:"Parque Olivas de Gramado, com piquenique, até 18h00"}], desl:"Aplicativo, 2 carros, 25 min", custo:"Ingressos R$ 521,50; piquenique R$ 625,00 (estimativa); aplicativo a partir de R$ 120,00", seg:"Baixo de dia", obs:"O parque fecha às 18h00 e o sol se põe por volta das 18h47. Confirmar se há evento Sunset com horário estendido: (54) 99610-7626."},
+  noite:{itens:[{h:"21h00",t:"Jantar de fondue",rest:[24,25,26]}], desl:"Aplicativo, 2 carros: Olivas → hotel, 25 min; hotel → restaurante, 4 min", custo:"Jantar R$ 500,00 a R$ 1.000,00; aplicativo a partir de R$ 150,00", seg:"Centro: moderado à noite", obs:"O Castelo Landelom tem sessão fixa às 21h00; os outros dois atendem sem hora marcada."}
+ }},
+ {id:"d07", data:"2026-11-07", sem:"Sáb", tit:"Parada, Brilho do Natal e despedida", slots:{
+  manha:{itens:[{h:"",t:"Tempo livre e compras no centro"}], desl:"A pé, 21 min", custo:"R$ 0,00", seg:"Baixo", obs:"Reserva para a caminhada, se chover em 02/11."},
+  tarde:{itens:[{h:"12h30",t:"Almoço",rest:[16,17]},{h:"15h00",t:"Parada de Natal, Av. Borges de Medeiros"},{h:"18h00",t:"O Brilho do Natal, Palácio dos Festivais"}], desl:"A pé no centro; volta de aplicativo, 2 carros, 3 min", custo:"Almoço R$ 249,50 a R$ 500,00; Parada R$ 0,00; Brilho R$ 420,00; aplicativo a partir de R$ 30,00", seg:"Centro: moderado ao anoitecer", obs:"A Parada passa pela Av. Borges de Medeiros."},
+  noite:{itens:[{h:"19h30",t:"Jantar de despedida",rest:[11,6]}], desl:"A pé desde o Palácio; volta de aplicativo, 2 carros, 3 min", custo:"Jantar R$ 500,00 a R$ 1.000,00; aplicativo a partir de R$ 30,00", seg:"Centro: moderado à noite", obs:"Dormir cedo por causa da partida."}
+ }},
+ {id:"d08", data:"2026-11-08", sem:"Dom", tit:"Volta", slots:{
+  manha:{itens:[{h:"07h30",t:"Café, check-out e transfer ao aeroporto (horário estimado)"},{h:"11h00",t:"Voo Porto Alegre → Guarulhos, chegada às 12h45"}], desl:"Van contratada, cerca de 2h", custo:"Já contratado", seg:"Estrada de dia: baixo", obs:"Conferir no balcão da GOL se a bagagem segue direto até Aracaju."},
+  tarde:{itens:[{h:"12h45",t:"Conexão e almoço no aeroporto de Guarulhos"},{h:"14h25",t:"Voo Guarulhos → Aracaju"}], desl:"Voo", custo:"Almoço R$ 625,00 (estimativa)", obs:"Conexão de 1h40, mesma companhia e mesma reserva."},
+  noite:{itens:[{h:"17h00",t:"Chegada a Aracaju"}], obs:"Fim da viagem."}
+ }}
+];
+
+const CHUVA = {
+ d02:"Chuva na manhã: trocar a caminhada por O Brilho do Natal das 15h00, em local coberto, e passar a caminhada para 07/11.",
+ d03:"Com chuva o Alpen Park suspende as atrações externas. Antecipar o NBA Park, que é coberto, e passar o Alpen Park para a manhã de 06/11. A Catedral de Pedra é visita interna e se mantém.",
+ d04:"A visita à Jolimont é em ambiente coberto e se mantém. À noite, o Palco Rua Coberta funciona sob cobertura, e o Show de Acendimento pode ser trocado por jantar mais cedo na Hector.",
+ d05:"O Nativitaten é ao ar livre. Passá-lo para 07/11 às 20h00 e antecipar O Brilho do Natal para 07/11 às 15h00; nesse caso, a Parada de Natal sai.",
+ d06:"Chuva à tarde: o Olivas tem trilhas e mirantes abertos. Trocar pela Azeiteria e pela Trattoria, que são cobertas, ou passar o parque para a manhã de 07/11."
+};
+
+/* Quadro B.3 */
+const REST = {
+ 1:{nome:"Cantina Di Capo",end:"Rua João Petry, 30, Centro, Gramado",coz:"Italiana, sequência de massas à vontade",preco:"Sequência Piccolo Capo R$ 99,90; Di Capo R$ 149,90. Grupo R$ 499,50 a R$ 749,50",nota:"4,5",av:"2.411",pratos:"Carpaccio de filé; sequências de massas",res:"Recomendada; compra antecipada com desconto no site",hor:"Todos os dias, 11h30 às 15h30 e 19h00 às 23h30",esc:1},
+ 2:{nome:"Cantina Pastasciutta",end:"Av. Borges de Medeiros, 2083, Centro, Gramado",coz:"Italiana",preco:"Individuais R$ 126,00 a R$ 188,00; para dois R$ 238,00 a R$ 362,00. Grupo R$ 602,00 a R$ 912,00",nota:"4,7",av:"11.856",pratos:"Spaghetti flambado no Grana Padano; Carbonara para dois; Scalopini ai Quattro Formaggi; Medaglione",res:"Fila de espera digital",hor:"Todos os dias, 11h30 às 23h30",esc:1},
+ 3:{nome:"Alecrim Santo",end:"Av. das Hortênsias, 1377, Centro, Gramado",coz:"Buffet livre e a quilo, grelhados",preco:"R$ 40,00 a R$ 80,00 por pessoa. Grupo R$ 200,00 a R$ 400,00",nota:"4,5",av:"3.159",pratos:"Grelhados; panquecas doces",res:"Não informada",hor:"Terça a sexta, 11h30 às 14h30; fim de semana até 15h00. 02/11 não confirmado",esc:1},
+ 4:{nome:"Ita Restaurante São Pedro",end:"Rua São Pedro, 1005, Centro, Gramado",coz:"Buffet livre",preco:"R$ 40,00 a R$ 60,00 por pessoa. Grupo R$ 200,00 a R$ 300,00",nota:"4,6",av:"3.475",pratos:"Buffet livre",res:"Não informada",hor:"Todos os dias, 11h30 às 14h30. 02/11 não confirmado",esc:1},
+ 5:{nome:"Gaúcho Grill",end:"Rua São Pedro, 810, Vila Suíça, Gramado",coz:"Carnes, churrasco gaúcho",preco:"R$ 60,00 a R$ 180,00 por pessoa. Grupo R$ 300,00 a R$ 900,00",nota:"4,9",av:"472",pratos:"Picanha no espeto; executivo de filé suíno",res:"Não informada",hor:"Terça a sábado, 11h00 às 22h00; domingo até 21h30. 02/11 não confirmado",esc:1},
+ 6:{nome:"Gramado & Brasa",end:"Rua Garibaldi, 271, Centro, Gramado",coz:"Churrascaria, rodízio de carnes, fondue",preco:"R$ 100,00 a R$ 200,00 por pessoa. Grupo R$ 500,00 a R$ 1.000,00",nota:"4,7",av:"3.358",pratos:"Rodízio de carnes",res:"Não informada",hor:"Todos os dias, 11h30 às 23h00. 02/11 não confirmado",esc:1},
+ 7:{nome:"Otto Bistrot",end:"Rua Borges de Medeiros, 706, Centro, Canela",coz:"Bistrô, risotos",preco:"R$ 80,00 a R$ 200,00 por pessoa. Grupo R$ 400,00 a R$ 1.000,00",nota:"4,7",av:"2.240",pratos:"Risotos",res:"Aceita reserva; avaliações relatam espera de cerca de 1 hora",hor:"Terça a domingo, 11h45 às 22h00",esc:1},
+ 8:{nome:"Casa Adri",end:"Praça João Correa, 57, Centro, Canela",coz:"Buffet livre e a quilo no almoço; galeteria no jantar",preco:"R$ 40,00 a R$ 60,00 por pessoa. Grupo R$ 200,00 a R$ 300,00",nota:"4,9",av:"1.058",pratos:"Buffet; galeto",res:"Não informada",hor:"Horário de terça-feira não confirmado",esc:1},
+ 9:{nome:"Cantina Linha Bella",end:"Estrada Linha Bonita, 4250, zona rural de Gramado",coz:"Italiana colonial, almoço temático rural",preco:"R$ 99,00 preço fixo. Grupo R$ 495,00",nota:"4,8",av:"1.935",pratos:"Almoço da casa; sagu de uva com creme",res:"Sim, pelo site",hor:"Almoço às segundas, quartas, sextas e sábados",esc:0},
+ 10:{nome:"Casa Figueira",end:"Estrada Serra Grande, 3945, Várzea Grande, Gramado",coz:"Buffet caseiro com vista da serra",preco:"R$ 80,00 a R$ 100,00 por pessoa. Grupo R$ 400,00 a R$ 500,00",nota:"4,6",av:"1.445",pratos:"Buffet caseiro; vale e horta própria",res:"Não informada",hor:"Terça a sábado, 11h00 às 13h30; fecha aos domingos",esc:1,melhor:1},
+ 11:{nome:"Famiglia Guimarães",end:"Rua Wilma Dinnebier, 91, Centro, Gramado",coz:"Italiana, cantina",preco:"R$ 100,00 a R$ 200,00 por pessoa. Grupo R$ 500,00 a R$ 1.000,00",nota:"4,7",av:"1.902",pratos:"Risoto da Nona, com linguiça colonial, R$ 159,90; Talharim ao Molho Pepe R$ 169,90",res:"Compra antecipada no site",hor:"Fecha às terças; demais dias 11h30 às 15h30 e 19h00 às 23h00",esc:1},
+ 12:{nome:"Churrascaria Chama de Fogo",end:"Av. Borges de Medeiros, 1350, Planalto, Gramado",coz:"Churrasco gaúcho, cortes Angus",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,7",av:"5.022",pratos:"Cortes Angus no espeto; buffet de saladas",res:"Não informada",hor:"Fecha às terças",esc:0},
+ 13:{nome:"Massita Massas e Risotos",end:"Rua Senador Salgado Filho, 295, Centro, Gramado",coz:"Italiana, massas e risotos",preco:"R$ 20,00 a R$ 40,00 por pessoa. Grupo R$ 100,00 a R$ 200,00",nota:"4,8",av:"206",pratos:"Massa com molho de carne",res:"Não informada",hor:"Todos os dias, 11h00 às 22h00",esc:1},
+ 14:{nome:"Roma Cucina Italiana",end:"Av. Borges de Medeiros, 3150A, Centro, Gramado",coz:"Italiana clássica",preco:"Não confirmado",nota:"4,8",av:"149",pratos:"Bruschetta; tiramisù",res:"Reserva por WhatsApp",hor:"Todos os dias, 11h30 às 23h00",esc:1},
+ 15:{nome:"Churrascaria Gramadense",end:"Rua Mário Bertoluci, 99, Centro, Gramado",coz:"Rodízio gaúcho",preco:"Não confirmado",nota:"4,9",av:"7.740",pratos:"Picanha no rodízio",res:"Aceita reserva",hor:"Fecha às quartas; quinta 11h30 às 23h00",esc:1},
+ 16:{nome:"Restaurante Serra Grill",end:"Rua São Pedro, 567, Centro, Gramado",coz:"Buffet livre e a quilo, com grelhados",preco:"R$ 80,00 a R$ 100,00 por pessoa. Grupo R$ 400,00 a R$ 500,00",nota:"4,5",av:"2.591",pratos:"Grelhados do buffet",res:"Não informada",hor:"Todos os dias, 11h30 às 15h00",esc:1},
+ 17:{nome:"Bifê Gramado",end:"Av. Borges de Medeiros, 3434, Centro, Gramado",coz:"Buffet livre",preco:"R$ 49,90 com sobremesa. Grupo R$ 249,50",nota:"4,9",av:"191",pratos:"Buffet com sobremesa",res:"Não informada",hor:"Horário não confirmado",esc:1},
+ 18:{nome:"Carne&Osso Steakhouse",end:"Av. das Hortênsias, 5530, entre Gramado e Canela",coz:"Steakhouse",preco:"Não confirmado; grupo R$ 625,00 por estimativa",nota:"4,5",av:"2.132",pratos:"Baita Steaks; risoto de alho-poró com medalhão",res:"Não informada",hor:"Todos os dias, 11h45 às 22h50",esc:0},
+ 19:{nome:"La Braise",end:"Rua Leopoldo Rosenfeld, 986, Centro, Gramado",coz:"Parrilla",preco:"Não confirmado",nota:"4,6",av:"366",pratos:"Parrilla",res:"Aceita reserva",hor:"Fecha às terças; demais dias 12h00 às 22h00",esc:0},
+ 20:{nome:"Restaurante Bêrga Mótta",end:"Estrada Profa. Elvira A. Benetti, km 5, Vale do Quilombo, Canela",coz:"Comida caseira em parque ecológico",preco:"Acima de R$ 200,00 por pessoa",nota:"4,6",av:"1.454",pratos:"Costelão 12 horas",res:"Não aceita reserva",hor:"Só sábados e domingos, 11h30 às 15h00",esc:0},
+ 21:{nome:"Restaurante Carazal",end:"Rua Germano Boff, Parque Tomasini, Gramado",coz:"Buffet colonial, forno a lenha",preco:"R$ 60,00 a R$ 80,00 por pessoa. Grupo R$ 300,00 a R$ 400,00",nota:"4,4",av:"1.667",pratos:"Pratos de forno a lenha",res:"Não informada",hor:"Terça a domingo, 11h40 às 15h00",esc:0},
+ 22:{nome:"Hector Pizzaria",end:"Av. Borges de Medeiros, 1791, Centro, Gramado",coz:"Pizzaria temática, rodízio",preco:"R$ 289,90 por pessoa até a véspera; R$ 349,90 no dia. Grupo R$ 1.449,50",nota:"4,7",av:"7.758",pratos:"Rodízio de discos de sabor, com show de magia e personagens",res:"Sim, mesa e horário. (54) 99688-5995",hor:"Domingo a quinta 18h15 e 20h45; sexta e sábado 17h20, 19h20 e 21h40",esc:1},
+ 23:{nome:"Casa Lovatto & Sartori",end:"Rua Euzébio Balzaretti, 557, Centro, Gramado",coz:"Mercearia italiana de família, tábuas",preco:"Não confirmado. (54) 3286-3030",nota:"5,0",av:"147",pratos:"Tábuas de frios e embutidos da casa",res:"Não informada",hor:"Quarta e quinta 12h00 às 21h00; sexta e sábado 9h00 às 21h00",esc:1},
+ 24:{nome:"Fondue Castelo Landelom",end:"Rua Bela Vista, 05, Centro, Gramado",coz:"Fondue de queijo, carne e chocolate",preco:"R$ 100,00 a R$ 200,00 por pessoa. Grupo R$ 500,00 a R$ 1.000,00",nota:"4,8",av:"11.766",pratos:"Fondue de queijo; sequência de fondue doce",res:"Sim, (54) 99635-4508",hor:"Fecha às terças; sessões 18h00 às 20h00 e 21h00 às 23h00",esc:1,melhor:1},
+ 25:{nome:"Le Chalet de La Fondue",end:"Av. das Hortênsias, 1297, Centro, Gramado",coz:"Suíça, fondue de carne, queijo e chocolate",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,5",av:"2.051",pratos:"Fondue de carne; fondue de chocolate",res:"Sim, (54) 3286-2474",hor:"Sexta a domingo 11h00 às 23h30; demais dias 16h00 às 23h30",esc:1},
+ 26:{nome:"Chalezinho Gramado",end:"Av. Borges de Medeiros, 2050, Centro, Gramado",coz:"Europeia, fondue",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,4",av:"2.278",pratos:"Fondues e pratos europeus",res:"Sim, (54) 98104-6555",hor:"Todos os dias, 18h00 às 00h00",esc:1}
+};
+
+/* Quadro B.4 */
+const PASS = [
+ {nome:"Nativitaten",end:"Serra Park, Rua Viação Férrea, 100",hor:"05 e 07/11 às 20h00; ao ar livre",ing:"Prata: R$ 360,00 inteira; R$ 180,00 meia",grupo:"R$ 1.260,00",ir:"Aplicativo, 2 carros, 9 min",compra:"Sim, tiqueteira oficial",esc:1,dia:"05/11"},
+ {nome:"O Brilho do Natal",end:"Palácio dos Festivais",hor:"02/11 às 15h00 e 18h00; 06/11 às 18h00; 07/11 às 15h00 e 18h00",ing:"R$ 120,00 inteira; R$ 60,00 meia",grupo:"R$ 420,00",ir:"A pé, 1,6 km, 21 min",compra:"Sim, tiqueteira oficial",esc:1,dia:"07/11"},
+ {nome:"Programação gratuita do Natal Luz",end:"Centro de Gramado",hor:"Acendimento diário às 20h00; Palco Rua Coberta de terça a domingo às 18h30; Vila de Natal das 9h00 às 21h00",ing:"Gratuito",grupo:"R$ 0,00",ir:"A pé, 21 min",compra:"Não",esc:1,dia:"02, 04 e 07/11"},
+ {nome:"Caminhada: Lago Negro, Rua Coberta e Praça das Etnias",end:"Lago Negro aberto 24 horas",hor:"Nota 4,8 com 25.242 avaliações",ing:"Gratuito; pedalinho não confirmado",grupo:"R$ 0,00",ir:"A pé, 1,4 km, 19 min",compra:"Não",esc:1,dia:"02/11"},
+ {nome:"Catedral de Pedra e centro de Canela",end:"Canela",hor:"8h00 às 19h00; nota 4,9",ing:"Gratuito",grupo:"R$ 0,00",ir:"Aplicativo, 2 carros, 14 min; ou linha 6152 desde a rodoviária",compra:"Não",esc:1,dia:"03/11"},
+ {nome:"Alpen Park",end:"Rodovia Arnaldo Oppitz, 901, Canela",hor:"Todos os dias, 9h00 às 17h00; troca do voucher até 14h00",ing:"Passaporte a partir de 1,30 m: R$ 148,90 (referência)",grupo:"R$ 446,70 para os pais e a adolescente",ir:"Aplicativo, 2 carros, 18 min",compra:"Sim, loja oficial. (54) 3282-9035",esc:1,dia:"03/11",alerta:"Passaporte com restrição médica para cardiopatia, hipertensão, problema de coluna e labirintite. Por isso os avós não o compram."},
+ {nome:"NBA Park Gramado",end:"Av. das Hortênsias, 4795, Carniel",hor:"Quarta a segunda, 10h00 às 17h00; fecha às terças",ing:"Adulto R$ 159,00; estudante com DNE e maiores de 60 anos R$ 124,50",grupo:"R$ 373,50 para a adolescente e os avós",ir:"Aplicativo, 1 carro, 8 min",compra:"Sim, site oficial, mais barato que a bilheteria",esc:1,dia:"05/11"},
+ {nome:"Parque Olivas de Gramado",end:"Rua Vereador José Alexandre Benetti, 1808, Linha Nova",hor:"Quinta a terça, 10h30 às 18h00; fecha às quartas",ing:"Sexta: adulto R$ 149,00; jovem, estudante e maiores de 60 R$ 74,50",grupo:"R$ 521,50; piquenique R$ 625,00 (estimativa)",ir:"Aplicativo, 2 carros, 25 min",compra:"Sim, loja oficial. (54) 99610-7626",esc:1,dia:"06/11"},
+ {nome:"Hard Rock Cafe Gramado",end:"Rua Wilma Dinnebier, 180",hor:"Todos os dias, 12h00 às 23h00; sexta e sábado até meia-noite",ing:"Só café e visita: cerca de R$ 50,00 por pessoa",grupo:"R$ 250,00 mais 12% de serviço",ir:"A pé, 1,8 km, 24 min",compra:"Não",esc:1,dia:"05/11"},
+ {nome:"Cervejaria Felsen, Beer Tour",end:"Rua São Marcos, 555, Carniel",hor:"Todos os dias, 10h00 às 18h00",ing:"R$ 79,00",grupo:"R$ 158,00 para 2 adultos",ir:"Aplicativo, 1 carro, 9 min",compra:"Recomendada",esc:1,dia:"04/11"},
+ {nome:"Adega Bertolucci",end:"Centro de Gramado",hor:"Terça 10h00 às 18h00; quarta a domingo 10h00 às 20h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,5 km, 20 min",compra:"Não",esc:1,dia:"05/11"},
+ {nome:"Dreamland, Museu de Cera",end:"Av. das Hortênsias, 5507",hor:"Terça a domingo, 8h00 às 18h00; segunda não confirmada",ing:"R$ 155,00",grupo:"R$ 775,00",ir:"Aplicativo, 2 carros, 8 min",compra:"Sim, site oficial",esc:0},
+ {nome:"BusTour, 1 dia, Gramado a Canela",end:"Brocker Turismo, Av. das Hortênsias, 1845, ou fundos da Praça das Etnias",hor:"Diário, validade até 18h00",ing:"R$ 88,00 de 13 a 59 anos; R$ 78,00 a partir de 60 (referência)",grupo:"R$ 420,00",ir:"O próprio ônibus",compra:"Sim",esc:0},
+ {nome:"Le Jardin Parque de Lavanda",end:"RS-115, 37700, Gramado",hor:"Terça a domingo, 9h30 às 17h00; melhor luz 9h30 às 11h00",ing:"R$ 35,00",grupo:"R$ 175,00",ir:"Aplicativo, 2 carros, 8 min",compra:"Não",esc:0},
+ {nome:"Noite Italiana, Cantina Linha Bella",end:"Estrada Linha Bonita, 4250",hor:"Conforme disponibilidade",ing:"R$ 295,00 com transfer (referência)",grupo:"R$ 1.475,00",ir:"Aplicativo, 2 carros, 14 min",compra:"Sim, 2 dias antes",esc:0},
+ {nome:"Cervejaria Ambarina",end:"Rua São Marcos, 787, Carniel",hor:"Terça a domingo, 10h00 às 19h00",ing:"Não confirmado",grupo:"Não confirmado",ir:"Aplicativo, 1 carro, 9 min",compra:"Não confirmada",esc:0},
+ {nome:"Cervejaria Farol, Beer Experience",end:"Rua Severino Inocente Zini, 150, Canela",hor:"Ter, qui, sex e sáb 11h00 às 23h30; dom 11h00 às 17h00; quarta fechada",ing:"R$ 139,00",grupo:"R$ 278,00 para 2 adultos",ir:"Aplicativo, 1 carro, 17 min",compra:"Recomendada",esc:0},
+ {nome:"Budegas Queijos Vinhos e Facas",end:"Galeria Dutra, Av. Borges de Medeiros, 2861",hor:"Terça a domingo, a partir de 9h15",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,7 km, 23 min",compra:"Não",esc:0},
+ {nome:"Adega Cavicchioni",end:"Av. das Hortênsias, 1409",hor:"Terça a domingo, 10h00 às 20h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,4 km, 19 min",compra:"Não",esc:0},
+ {nome:"Loja 10 Jolimont",end:"Av. das Hortênsias, 3570",hor:"Terça a domingo, 8h00 às 18h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"Aplicativo, 1 carro, 5 min",compra:"Não",esc:0},
+ {nome:"Vinícola Ravanello",end:"Rodovia ERS-235, Gramado",hor:"Terça a sábado, 9h30 às 17h15; domingo fechada",ing:"Não confirmado",grupo:"Não confirmado",ir:"Aplicativo, 1 carro, 9 min",compra:"Não confirmada",esc:0},
+ {nome:"Vinícola Jolimont",end:"Estrada Morro Calçado, 1420, Canela",hor:"Terça a domingo, 9h00 às 16h45, visita agendada; no roteiro, às 10h00 de 04/11",ing:"Tour R$ 149,00; Pisa das Uvas R$ 89,00; Piquenique R$ 129,00",grupo:"R$ 298,00 para 2 adultos no Tour (só os pais)",ir:"Aplicativo, 1 carro, 23 min",compra:"Sim, agendamento; duração não publicada",esc:1,dia:"04/11"}
+];
+
+/* Quadro B.11: orçamento do trio e parte dos avós */
+const ORC = {
+ cats:[
+  {id:"alim", nome:"Alimentação", teto:6000, prev:5429.70},
+  {id:"pass", nome:"Passeios e espetáculos", teto:6000, prev:2599.70},
+  {id:"transp", nome:"Transporte local", teto:1000, prev:684.00},
+  {id:"outros", nome:"Imprevistos e outros", teto:2000, prev:0}
+ ],
+ tetoTrio:15000, prevTrio:8713.40, prevAvos:4893.80, prevGrupo:13607.20
+};
+const RATEIO = {grupo:"Grupo: 3/5 trio, 2/5 avós", trio:"Só o trio", avos:"Só os avós"};
+
+/* ===================== ESTADO ===================== */
+const S = {sim:null, db:null, owner:false, dbStatus:"carregando", aj:{}, dias:{}, gastos:[], tab:"hoje", dia:null, lug:"rest", lugFiltro:"rot", confirmar:null};
+
+/* ===================== UTILIDADES ===================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const brl = v => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(v||0);
+const dataBR = iso => iso ? iso.slice(8,10)+"/"+iso.slice(5,7)+"/"+iso.slice(0,4) : "";
+const ddmm = iso => iso.slice(8,10)+"/"+iso.slice(5,7);
+function minDe(h){ const m = /^(\d{1,2})h(\d{2})?$/.exec((h||"").trim()); return m ? (+m[1])*60 + (+(m[2]||0)) : null; }
+function hDe(min){ return String(Math.floor(min/60)).padStart(2,"0")+"h"+String(min%60).padStart(2,"0"); }
+function parseValor(s){ s = String(s||"").replace(/[R$\s]/g,""); if (s.includes(",")) s = s.replace(/\./g,"").replace(",","."); const v = parseFloat(s); return isFinite(v) ? Math.round(v*100)/100 : NaN; }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+function agora(){
+  if (S.sim) return S.sim;
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return {data:`${p.year}-${p.month}-${p.day}`, min:(+p.hour%24)*60 + (+p.minute)};
+}
+function diasEntre(a,b){ return Math.round((Date.parse(b+"T00:00:00Z") - Date.parse(a+"T00:00:00Z"))/86400000); }
+
+function tipo(it){
+  if (it.rest) return ["comer","Refeição"];
+  if (/Nativitaten|Brilho|Acendimento|Parada|Palco/.test(it.t)) return ["natal","Natal Luz"];
+  if (/Voo|transfer|Check-in|Chegada a|Conexão|Pouso/.test(it.t)) return ["viagem","Viagem"];
+  if (/Tempo livre|Descanso|Sem atividade/.test(it.t)) return ["livre","Livre"];
+  return ["passeio","Passeio"];
+}
+function restTexto(it){
+  if (it.outro) return {esc:it.outro};
+  if (it.esc && REST[it.esc]) return {esc:REST[it.esc].nome};
+  return {opc: it.rest.map(n => REST[n]?.nome).filter(Boolean).join(" ou ")};
+}
+
+/* slot efetivo = base + ajuste gravado */
+function slotId(d,p){ return d+"-"+p; }
+function slot(d, p){
+  const dia = DIAS.find(x=>x.id===d), base = dia.slots[p], a = S.aj[slotId(d,p)];
+  return {...base, itens: a && Array.isArray(a.itens) ? a.itens : base.itens, nota: a?.nota || "", alterado: !!a, em: a?.em};
+}
+function itensDoDia(d){
+  const out = [];
+  for (const p of ["manha","tarde","noite"]){
+    let last = PER_MIN[p];
+    slot(d,p).itens.forEach((it,i) => {
+      const m = minDe(it.h);
+      if (m != null) last = m;
+      out.push({...it, per:p, i, min:last, slot:slotId(d,p)});
+    });
+  }
+  return out;
+}
+
+function toast(msg){ const t = $("#toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(()=>{ t.hidden = true; }, 3200); }
+
+/* ===================== GRAVAÇÃO ===================== */
+async function gravarSlot(id, itens, nota){
+  if (!S.db) return;
+  const ord = itens.map((it,k)=>({it,k}));
+  let last = -1;
+  ord.forEach(o => { const m = minDe(o.it.h); if (m != null) last = m; o.m = last; });
+  ord.sort((a,b)=> a.m - b.m || a.k - b.k);
+  try { await S.db.doc("ajustes/"+id).set({itens: ord.map(o=>o.it), nota: nota||"", em:new Date().toISOString()}); toast("Programação salva"); }
+  catch(e){ toast("Não foi possível salvar: "+(e?.code==="unavailable" ? "sem conexão, tente de novo" : (e?.message||"erro"))); }
+}
+async function alterarItem(id, i, fn){
+  const [d,p] = id.split("-");
+  const s = slot(d,p), itens = clone(s.itens);
+  fn(itens[i]);
+  await gravarSlot(id, itens, s.nota);
+}
+
+/* ===================== RENDER ===================== */
+function render(){
+  if (ESTATICO?.semGastos){ const bg = document.querySelector('nav.abas [data-v="gastos"]'); if (bg) bg.hidden = true; if (S.tab==="gastos") S.tab = "hoje"; }
+  document.querySelectorAll("nav.abas button").forEach(b => b.setAttribute("aria-current", String(b.dataset.v===S.tab)));
+  let av = "";
+  if (S.dbStatus==="estatico") av = `<div class="aviso">Atualizado em ${esc(ESTATICO.quando)}. As mudanças feitas depois disso aparecem quando o organizador publicar de novo.</div>`;
+  else if (S.dbStatus==="off") av = `<div class="aviso">Mostrando o roteiro original. As alterações feitas durante a viagem aparecem quando a página abre com conexão e conta claude.ai.</div>`;
+  else if (S.owner) av = `<div class="aviso ed">Modo organizador: você pode alterar a programação e lançar gastos. Os demais só consultam.</div>`;
+  $("#aviso").innerHTML = av;
+  const v = {hoje:vHoje, roteiro:vRoteiro, lugares:vLugares, gastos:vGastos, info:vInfo}[S.tab]();
+  $("#view").innerHTML = v;
+}
+
+function itemHTML(it, sid, i, opts={}){
+  const [k,lab] = tipo(it);
+  const st = it.st || "";
+  let nome = esc(it.t);
+  let extra = "";
+  if (it.rest){
+    const r = restTexto(it);
+    nome = esc(it.t) + ": " + (r.esc ? `<span class="rest-esc">${esc(r.esc)}</span>` : `<span class="rest-opc">${esc(r.opc)}</span>`);
+    if (S.owner && opts.edit && st!=="cancelado"){
+      extra = `<div class="chips">${it.rest.map(n=>`<button type="button" class="chip" data-act="esc" data-slot="${sid}" data-i="${i}" data-v="${n}" aria-pressed="${it.esc==n && !it.outro}">${esc(REST[n].nome)}</button>`).join("")}</div>`;
+    }
+  }
+  const chk = (S.owner && opts.edit) ? `<button type="button" class="check" data-act="feito" data-slot="${sid}" data-i="${i}" aria-pressed="${st==="feito"}" aria-label="Marcar como feito">✓</button>` : `<span></span>`;
+  return `<li class="item k-${k} ${st} ${opts.atual?"atual":""}"><span class="h">${esc(it.h||"")}</span><div class="t"><span class="tp">${lab}${st==="cancelado"?" · cancelado":""}</span><span class="nome">${nome}</span>${extra}</div>${chk}</li>`;
+}
+
+function vHoje(){
+  const n = agora();
+  const faixa = S.sim ? `<div class="aviso ed">Simulação: ${DIAS.find(d=>d.data===S.sim.data)?.sem||""}, ${ddmm(S.sim.data)} às ${hDe(S.sim.min)}. <button type="button" class="btn peq" data-act="sim-off">Voltar ao horário real</button></div>` : "";
+  const hv = S.sim ? hDe(S.sim.min).replace("h",":") : "14:00";
+  const painel = `<details class="card"${S.sim?" open":""}><summary class="sec" style="cursor:pointer">Simular outro dia e hora</summary>
+    <div class="acoes" style="margin-top:10px;align-items:flex-end">
+      <label class="campo">Dia<select class="inp" id="sim-dia">${DIAS.map(d=>`<option value="${d.data}" ${S.sim?.data===d.data?"selected":""}>${d.sem}, ${ddmm(d.data)}</option>`).join("")}</select></label>
+      <label class="campo">Hora<input class="inp num" type="time" id="sim-hora" value="${hv}"></label>
+      <button type="button" class="btn pri" data-act="sim">Simular</button>
+    </div>
+    <p class="sec" style="font-size:.82rem;margin-top:8px">Só muda o que esta tela mostra para você. Nada é gravado.</p></details>`;
+  return faixa + vHojeCorpo(n) + `<div style="margin-top:14px">${painel}</div>`;
+}
+function vHojeCorpo(n){
+  const ini = DIAS[0].data, fim = DIAS[DIAS.length-1].data;
+  if (n.data < ini){
+    const f = diasEntre(n.data, ini);
+    const d1 = itensDoDia("d01").filter(x=>x.h);
+    return `<div class="bloco">
+      <div class="agora"><span class="eyebrow">Faltam</span><span class="contagem num">${f} ${f===1?"dia":"dias"}</span><p class="sec">Embarque em 01/11/2026, domingo, às 15h30, no Galeão (voo G3 2090).</p></div>
+      <div class="card"><h3>Primeiro dia</h3><ul class="itens" style="margin-top:8px">${d1.map(it=>itemHTML(it,it.slot,it.i)).join("")}</ul></div>
+      ${prazos(n.data)}
+    </div>`;
+  }
+  if (n.data > fim){
+    const tot = S.gastos.reduce((a,g)=>a+(g.valor||0),0);
+    return `<div class="bloco"><div class="agora"><span class="eyebrow">Viagem encerrada</span><span class="oq">01 a 08/11/2026</span>${ESTATICO?.semGastos ? "" : `<p class="sec">Gastos lançados: <b class="num">${brl(tot)}</b>, contra ${brl(ORC.prevGrupo)} previstos para o grupo.</p>`}</div></div>`;
+  }
+  const dia = DIAS.find(d=>d.data===n.data);
+  const its = itensDoDia(dia.id);
+  const ativos = its.filter(x=>x.st!=="cancelado");
+  let atual = null, prox = null;
+  for (const x of ativos){ if (x.min <= n.min) atual = x; else if (!prox) prox = x; }
+  let proxDia = null;
+  if (!prox){ const ix = DIAS.indexOf(dia); if (DIAS[ix+1]) { proxDia = DIAS[ix+1]; prox = itensDoDia(proxDia.id).find(x=>x.st!=="cancelado"); } }
+  const falta = prox && !proxDia ? prox.min - n.min : null;
+  const fmtFalta = m => m < 60 ? `${m} min` : `${Math.floor(m/60)}h${String(m%60).padStart(2,"0")}`;
+  const s = atual ? slot(dia.id, atual.per) : null;
+  const chuva = S.dias[dia.id]?.chuva && CHUVA[dia.id];
+  return `<div class="bloco">
+    <div class="dia-cab"><h2>${dia.sem}, ${ddmm(dia.data)}</h2><span class="sec">${esc(dia.tit)}</span></div>
+    ${chuva ? `<div class="chuva-box"><b>Plano de chuva em vigor</b><span>${esc(CHUVA[dia.id])}</span></div>` : ""}
+    ${atual ? `<div class="agora"><span class="eyebrow">Agora</span><span class="oq">${itemNome(atual)}</span>${s?.desl?`<p class="sec">${esc(s.desl)}</p>`:""}${s?.obs?`<p class="obs">${esc(s.obs)}</p>`:""}${s?.nota?`<p class="nota">${esc(s.nota)}</p>`:""}</div>` : ""}
+    ${prox ? `<div class="agora"><span class="eyebrow">A seguir${proxDia?`, ${proxDia.sem} ${ddmm(proxDia.data)}`:""}</span><span class="hora num">${esc(prox.h || PER[prox.per])}</span><span class="oq">${itemNome(prox)}</span>${falta!=null?`<span class="cont">começa em <b class="num">${fmtFalta(falta)}</b></span>`:""}</div>` : ""}
+    <div class="card"><h3>Programação do dia</h3><ul class="itens" style="margin-top:8px">${its.map(it=>itemHTML(it,it.slot,it.i,{edit:true, atual: atual && it.slot===atual.slot && it.i===atual.i})).join("")}</ul></div>
+  </div>`;
+}
+function itemNome(it){ if (!it.rest) return esc(it.t); const r = restTexto(it); return esc(it.t)+": "+esc(r.esc || r.opc); }
+
+function prazos(hoje){
+  const P = [
+    ["2026-10-21","Comprar na tiqueteira oficial o Nativitaten de 05/11 e O Brilho do Natal de 07/11 às 18h00; levar a CIE válida da adolescente (meia limitada a 40% dos ingressos)."],
+    ["2026-10-22","Vacina contra febre amarela para quem não tem a dose; avós com orientação médica."],
+    ["2026-10-30","Agendar o Tour Jolimont para 04/11 às 10h00, com 2 adultos, e confirmar a duração."],
+    ["2026-10-30","Reservar a Hector para 04/11 às 20h45 e o fondue de 06/11; ligar aos restaurantes de 02/11 para confirmar o feriado."],
+    ["2026-10-31","Confirmar o transfer de 01/11 e 08/11; reservar o Beer Tour da Felsen; confirmar no Olivas o piquenique e o evento Sunset."],
+    ["2026-11-02","Comprar online o Alpen Park de 03/11 e o NBA Park de 05/11."],
+    ["2026-11-05","Comprar online o Parque Olivas de 06/11."]
+  ].filter(p => p[0] >= hoje);
+  if (!P.length) return "";
+  return `<div class="card"><h3>Próximos prazos</h3><div class="tabw" style="margin-top:10px;border:0"><table><tbody>${P.map(p=>`<tr><td class="n"><b>até ${ddmm(p[0])}</b></td><td>${esc(p[1])}</td></tr>`).join("")}</tbody></table></div></div>`;
+}
+
+function vRoteiro(){
+  const n = agora();
+  if (!S.dia) S.dia = (DIAS.find(d=>d.data===n.data) || DIAS[0]).id;
+  const dia = DIAS.find(d=>d.id===S.dia);
+  const sel = `<div class="dias" role="tablist">${DIAS.map(d=>`<button type="button" data-act="dia" data-v="${d.id}" aria-current="${d.id===S.dia}" class="${d.data===n.data?"hoje":""}"><small>${d.data===n.data?"hoje":d.sem}</small><b class="num">${d.data.slice(8)}</b></button>`).join("")}</div>`;
+  const chuvaOn = !!S.dias[dia.id]?.chuva;
+  const chuva = CHUVA[dia.id] ? `<div class="chuva-box"><b>${chuvaOn?"Plano de chuva em vigor":"Se chover"}</b><span>${esc(CHUVA[dia.id])}</span>${S.owner?`<div><button type="button" class="btn peq" data-act="chuva" data-dia="${dia.id}">${chuvaOn?"Voltar ao plano normal":"Aplicar plano de chuva"}</button></div>`:""}</div>` : "";
+  const pers = ["manha","tarde","noite"].map(p=>{
+    const s = slot(dia.id,p), sid = slotId(dia.id,p);
+    const conf = S.confirmar === "desf-"+sid;
+    return `<section class="periodo">
+      <div class="per-cab"><span class="eyebrow">${PER[p]}${s.alterado?` <span class="pill">alterado</span>`:""}</span>
+        ${S.owner?`<div class="acoes"><button type="button" class="btn peq" data-act="editar" data-slot="${sid}">Editar</button>${s.alterado?`<button type="button" class="btn peq ${conf?"alerta":""}" data-act="desfazer" data-slot="${sid}">${conf?"Confirmar: voltar ao original":"Desfazer"}</button>`:""}</div>`:""}</div>
+      <ul class="itens">${s.itens.map((it,i)=>itemHTML(it,sid,i,{edit:true})).join("")}</ul>
+      ${s.nota?`<p class="nota">${esc(s.nota)}</p>`:""}
+      ${(s.desl||s.custo||s.seg)?`<dl class="det">${s.desl?`<dt>Ir</dt><dd>${esc(s.desl)}</dd>`:""}${s.custo?`<dt>Custo</dt><dd>${esc(s.custo)}</dd>`:""}${s.seg?`<dt>Segurança</dt><dd>${esc(s.seg)}</dd>`:""}</dl>`:""}
+      ${s.obs?`<p class="obs">${esc(s.obs)}</p>`:""}
+    </section>`;
+  }).join("");
+  return `<div class="bloco">${sel}
+    <div class="dia-cab"><h2>${dia.sem}, ${dataBR(dia.data)}</h2><span class="sec">${esc(dia.tit)}</span></div>
+    ${chuva}
+    <div class="card bloco">${pers}</div>
+  </div>`;
+}
+
+function usosRest(){
+  const u = {};
+  for (const d of DIAS) for (const p of ["manha","tarde","noite"]) for (const it of slot(d.id,p).itens){
+    if (!it.rest) continue;
+    const alvo = it.outro ? [] : it.esc ? [it.esc] : it.rest;
+    alvo.forEach(n => (u[n] = u[n] || []).push(`${d.sem} ${ddmm(d.data)}, ${PER[p].toLowerCase()}${it.esc?"":" (opção)"}`));
+  }
+  return u;
+}
+function vLugares(){
+  const seg = `<div class="seg"><button type="button" data-act="lug" data-v="rest" aria-pressed="${S.lug==="rest"}">Restaurantes</button><button type="button" data-act="lug" data-v="pass" aria-pressed="${S.lug==="pass"}">Passeios</button></div>`;
+  const filt = `<div class="seg"><button type="button" data-act="lugf" data-v="rot" aria-pressed="${S.lugFiltro==="rot"}">No roteiro</button><button type="button" data-act="lugf" data-v="opc" aria-pressed="${S.lugFiltro==="opc"}">Opcionais</button></div>`;
+  let lista = "";
+  if (S.lug==="rest"){
+    const u = usosRest();
+    lista = Object.entries(REST).filter(([n,r]) => S.lugFiltro==="rot" ? !!u[n] : !u[n]).map(([n,r])=>`<article class="card lugar">
+      <div class="cab"><h3>${esc(r.nome)}</h3><span class="nota-g">${r.nota} <span class="sec" style="font-weight:400">(${r.av})</span></span></div>
+      ${u[n]?`<span class="usado">${u[n].map(esc).join(" · ")}</span>`:""}
+      ${r.melhor?`<span class="tag ok">Recomendado no roteiro</span>`:""}
+      <p class="sec">${esc(r.coz)}</p>
+      <dl class="det"><dt>Endereço</dt><dd>${esc(r.end)}</dd><dt>Preço</dt><dd>${esc(r.preco)}</dd><dt>Pratos</dt><dd>${esc(r.pratos)}</dd><dt>Horário</dt><dd>${esc(r.hor)}</dd><dt>Reserva</dt><dd>${esc(r.res)}</dd></dl>
+    </article>`).join("");
+    lista += `<p class="sec" style="font-size:.85rem">Notas do Google. Valores do grupo de 5, sem bebidas, por estimativa, pesquisados em 09/10/2026.</p>`;
+  } else {
+    lista = PASS.filter(p => S.lugFiltro==="rot" ? p.esc : !p.esc).map(p=>`<article class="card lugar">
+      <div class="cab"><h3>${esc(p.nome)}</h3>${p.dia?`<span class="usado">${esc(p.dia)}</span>`:""}</div>
+      <dl class="det"><dt>Onde</dt><dd>${esc(p.end)}</dd><dt>Quando</dt><dd>${esc(p.hor)}</dd><dt>Ingresso</dt><dd>${esc(p.ing)}</dd><dt>Grupo</dt><dd>${esc(p.grupo)}</dd><dt>Ir</dt><dd>${esc(p.ir)}</dd><dt>Compra</dt><dd>${esc(p.compra)}</dd></dl>
+      ${p.alerta?`<p class="obs">${esc(p.alerta)}</p>`:""}
+    </article>`).join("");
+    lista += `<p class="sec" style="font-size:.85rem">Degustação em cervejarias e vinícolas: idade mínima de 18 anos.</p>`;
+  }
+  return `<div class="bloco"><div class="acoes" style="justify-content:space-between">${seg}${filt}</div>${lista}</div>`;
+}
+
+function calcGastos(){
+  const r = {trio:0, avos:0, total:0, cat:{}};
+  ORC.cats.forEach(c => r.cat[c.id] = 0);
+  for (const g of S.gastos){
+    const v = g.valor || 0, t = g.rateio==="trio" ? v : g.rateio==="avos" ? 0 : v*3/5;
+    r.total += v; r.trio += t; r.avos += v - t;
+    if (r.cat[g.cat] != null) r.cat[g.cat] += t;
+  }
+  return r;
+}
+function barra(v, teto, prev){
+  const w = Math.min(100, teto ? v/teto*100 : 0), pm = prev && teto ? Math.min(100, prev/teto*100) : null;
+  return `<div class="barra"><i class="${prev && v>prev?"alto":""}" style="width:${w.toFixed(1)}%"></i>${pm!=null?`<s style="left:${pm.toFixed(1)}%"></s>`:""}</div>`;
+}
+function vGastos(){
+  const c = calcGastos(), n = agora();
+  const resumo = `<div class="grade2">
+    <div class="card metrica"><span class="eyebrow">Trio (15, 46 e 59 anos)</span><span class="v num">${brl(c.trio)}</span>${barra(c.trio, ORC.tetoTrio, ORC.prevTrio)}<span class="sec num" style="font-size:.85rem">previsto ${brl(ORC.prevTrio)} · teto ${brl(ORC.tetoTrio)}</span></div>
+    <div class="card metrica"><span class="eyebrow">Avós</span><span class="v num">${brl(c.avos)}</span>${barra(c.avos, ORC.prevAvos, null)}<span class="sec num" style="font-size:.85rem">previsto ${brl(ORC.prevAvos)}</span></div>
+  </div>`;
+  const cats = `<div class="card bloco"><h3>Trio por categoria</h3>${ORC.cats.map(k=>`<div class="cat"><div class="lin"><b>${k.nome}</b><span class="num">${brl(c.cat[k.id])} <span class="sec">de ${brl(k.teto)}${k.prev?`, previsto ${brl(k.prev)}`:""}</span></span></div>${barra(c.cat[k.id], k.teto, k.prev)}</div>`).join("")}<p class="sec" style="font-size:.82rem">A marca vertical indica o previsto no Quadro B.11; a barra fica laranja quando o gasto passa do previsto. Voos, hotel e transfer já foram pagos e não entram aqui.</p></div>`;
+  const hojeTrip = n.data >= DIAS[0].data && n.data <= DIAS[7].data ? n.data : DIAS[0].data;
+  const form = S.owner ? `<form class="card gasto" id="f-gasto">
+    <h3 class="full">Lançar gasto</h3>
+    <label class="campo">Data<input class="inp" type="date" id="g-data" min="2026-10-01" max="2026-11-30" value="${hojeTrip}" required></label>
+    <label class="campo">Valor (R$)<input class="inp num" id="g-valor" inputmode="decimal" placeholder="0,00" required></label>
+    <label class="campo full">Descrição<input class="inp" id="g-desc" placeholder="Ex.: jantar na Pastasciutta" maxlength="120" required></label>
+    <label class="campo">Categoria<select class="inp" id="g-cat">${ORC.cats.map(k=>`<option value="${k.id}">${k.nome}</option>`).join("")}</select></label>
+    <label class="campo">Quem paga<select class="inp" id="g-rat">${Object.entries(RATEIO).map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></label>
+    <div class="full acoes"><button class="btn pri" type="submit">Lançar</button></div>
+  </form>` : "";
+  const ord = [...S.gastos].sort((a,b)=> (b.data||"").localeCompare(a.data||"") || (b.em||"").localeCompare(a.em||""));
+  const lista = ord.length ? `<div class="card"><h3>Lançamentos <span class="sec num" style="font-family:var(--f-txt);font-size:.9rem">${brl(c.total)} no total</span></h3><div style="margin-top:8px">${ord.map(g=>{
+    const conf = S.confirmar === "g-"+g.id;
+    return `<div class="lanc"><span>${esc(g.desc)}</span><span class="val">${brl(g.valor)}</span><span class="meta">${dataBR(g.data)} · ${esc((ORC.cats.find(k=>k.id===g.cat)||{}).nome||"")} · ${esc(RATEIO[g.rateio]||"")}</span>${S.owner?`<span style="text-align:right"><button type="button" class="btn peq ${conf?"alerta":""}" data-act="delgasto" data-id="${esc(g.id)}">${conf?"Confirmar exclusão":"Excluir"}</button></span>`:"<span></span>"}</div>`;
+  }).join("")}</div></div>` : `<div class="card"><h3>Nenhum gasto lançado</h3><p class="sec" style="margin-top:6px">${S.owner?"Use o formulário acima para lançar a primeira despesa. A divisão padrão segue o roteiro: 3/5 para o trio e 2/5 para os avós.":"Os gastos lançados pelo organizador aparecem aqui, com a comparação contra o orçamento."}</p></div>`;
+  return `<div class="bloco">${resumo}${cats}${form}${lista}</div>`;
+}
+
+function vInfo(){
+  const tabela = (cab, linhas) => `<div class="tabw"><table><thead><tr>${cab.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${linhas.map(l=>`<tr>${l.map((c,i)=>`<td${i>0&&/R\$|^\d/.test(c)?' class="n"':""}>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  return `<div class="bloco">
+  <section class="card bloco"><h3>Emergência</h3>
+    ${tabela(["Serviço","Número"],[["Brigada Militar",'<span class="fone">190</span>'],["SAMU",'<span class="fone">192</span>'],["Bombeiros",'<span class="fone">193</span>'],["Defesa Civil",'<span class="fone">199</span>'],["Polícia Rodoviária Federal",'<span class="fone">191</span>'],["Central de Atendimento à Mulher",'<span class="fone">180</span>']])}
+  </section>
+  <section class="card bloco"><h3>Hotel e voos</h3>
+    <dl class="det"><dt>Hotel</dt><dd>Bavária Sport Hotel, Rua da Bavária, 543, Gramado/RS, CEP 95670-000. Café da manhã incluído; check-in 14h00, check-out 12h00</dd>
+    <dt>A pé</dt><dd>Lago Negro 1,4 km (19 min); Palácio dos Festivais e Rua Coberta 1,6 km (21 min); rodoviária 1,6 km (22 min)</dd>
+    <dt>Ida</dt><dd>01/11, G3 2090, Galeão 15h30 → Porto Alegre 17h40, direto</dd>
+    <dt>Volta</dt><dd>08/11, Porto Alegre 11h00 → Guarulhos 12h45; Guarulhos 14h25 → Aracaju 17h00</dd>
+    <dt>Reserva</dt><dd>GOL; o quinto viajante está nos mesmos voos, em outra reserva</dd>
+    <dt>Transfer</dt><dd>Van contratada, Aeroporto Salgado Filho ↔ hotel, cerca de 2h</dd></dl>
+  </section>
+  <section class="card bloco"><h3>Natal Luz no período</h3>
+    ${tabela(["Espetáculo","Sessões de 01 a 08/11","Inteira","Meia"],[["Nativitaten, Serra Park","05 e 07/11 às 20h00","R$ 360,00","R$ 180,00"],["O Brilho do Natal, Palácio dos Festivais","02/11 às 15h00 e 18h00; 06/11 às 18h00; 07/11 às 15h00 e 18h00","R$ 120,00","R$ 60,00"]])}
+    <ul class="lista"><li>Show de Acendimento: todos os dias às 20h00, no Palácio dos Festivais.</li><li>Vila de Natal: todos os dias das 9h00 às 21h00, na Praça das Etnias.</li><li>Palco Rua Coberta: terça a domingo às 18h30; sábado e domingo também às 11h30.</li><li>Parada de Natal: sextas, sábados e domingos às 15h00, na Av. Borges de Medeiros.</li></ul>
+    <p class="sec" style="font-size:.88rem">Meia-entrada para estudantes (com CIE), maiores de 60 anos e pessoas com deficiência, com comprovação na entrada. A meia de estudante está limitada a 40% dos ingressos de cada sessão.</p>
+  </section>
+  <section class="card bloco"><h3>Segurança</h3>
+    ${tabela(["Área","Dia","Noite","Conduta"],[["Gramado em geral","Baixo","Baixo","Celular e carteira protegidos em aglomerações"],["Bavária, entorno do hotel","Baixo","Baixo","À noite, táxi ou aplicativo em trechos pouco iluminados"],["Centro: Borges de Medeiros, Rua Coberta, Palácio","Baixo","Moderado","Bolsa fechada à frente; não aceitar ofertas na rua"],["Serra Park, saída dos espetáculos","Baixo","Moderado","Combinar a volta antes do espetáculo"],["Lago Negro e Planalto","Baixo","Baixo","Evitar margens e trilhas depois do anoitecer"],["Canela, centro e atrações","Baixo","Moderado","Visitar de dia; à noite, táxi ou aplicativo"],["Aeroporto Salgado Filho","Moderado","Moderado","Ir direto ao transfer; recusar ofertas de transporte"]])}
+    <p class="sec" style="font-size:.85rem">Avaliação feita no roteiro, com dados da SSP-RS de janeiro a setembro de 2026. Nenhuma área de risco elevado em Gramado ou Canela.</p>
+    <h3 style="font-size:1.05rem;font-family:var(--f-txt);font-weight:700">Golpes comuns</h3>
+    <ul class="lista"><li>Vendedores de multipropriedade abordando na rua; a abordagem em via pública é proibida pela Prefeitura.</li><li>Ingressos grátis ou com desconto condicionados a apresentação de vendas.</li><li>Ingressos do Natal Luz vendidos fora da tiqueteira oficial.</li><li>Clonagem de cartão em lojas e caixas eletrônicos.</li><li>Bebida adulterada: comprar vinho e cerveja só em estabelecimento regular, com garrafa lacrada.</li></ul>
+  </section>
+  <section class="card bloco"><h3>Documentos</h3>
+    <ul class="lista"><li>Adultos: RG, CNH ou outro documento oficial com foto.</li><li>Adolescente (15 anos, com os pais): RG ou passaporte e documento que comprove a filiação, como a certidão de nascimento. Não precisa de autorização de viagem.</li><li>A CIE não é documento de embarque; serve só para a meia-entrada.</li></ul>
+  </section>
+  <section class="card bloco"><h3>Clima, sol e calendário</h3>
+    <ul class="lista"><li>Novembro em Gramado: mínima de 14 °C, máxima de 23,4 °C, 167 mm de chuva em cerca de 10 dias. Levar agasalho e capa de chuva.</li><li>Sol: nasce às 05h30 e se põe às 18h45 em 01/11; nasce às 05h25 e se põe às 18h50 em 08/11 (estimativa).</li><li>02/11, segunda-feira, é Finados, feriado nacional. O Natal Luz vai de 22/10/2026 a 17/01/2027: alta temporada.</li><li>Taxa de serviço, em geral 10%, é facultativa; o couvert artístico precisa ser informado antes, com o valor.</li></ul>
+  </section>
+  <section class="card bloco"><h3>Telefones para confirmar</h3>
+    ${tabela(["Local","Telefone","O que confirmar"],[["Parque Olivas",'<span class="fone">(54) 99610-7626</span>',"Evento Sunset e piquenique"],["Alpen Park",'<span class="fone">(54) 3282-9035</span>',"Preço do passaporte; entrada dos avós"],["Hector Pizzaria",'<span class="fone">(54) 99688-5995</span>',"Bebidas e preço para menor"],["Castelo Landelom",'<span class="fone">(54) 99635-4508</span>',"Preço do fondue"],["Le Chalet de La Fondue",'<span class="fone">(54) 3286-2474</span>',"Preço do fondue"],["Chalezinho",'<span class="fone">(54) 98104-6555</span>',"Preço do fondue"],["Vinícola Jolimont","Painel de reservas da vinícola","Duração do tour e vaga em 04/11 às 10h00"],["Casa Lovatto & Sartori",'<span class="fone">(54) 3286-3030</span>',"Preço do almoço"]])}
+  </section>
+  <p class="sec" style="font-size:.82rem">Fonte: roteiro de 12/10/2026 (AF_LAST_Roteiro_Gramado), com preços pesquisados em 09/10/2026. Revalidar antes da compra.</p>
+  </div>`;
+}
+
+/* ===================== DIÁLOGO DE EDIÇÃO ===================== */
+let ED = null;
+function abrirEditor(sid){
+  const [d,p] = sid.split("-");
+  const s = slot(d,p), dia = DIAS.find(x=>x.id===d);
+  ED = {sid, itens: clone(s.itens), nota: s.nota, titulo:`${dia.sem}, ${ddmm(dia.data)} · ${PER[p]}`};
+  desenharEditor();
+  $("#dlg").showModal();
+}
+function lerEditor(){
+  ED.itens.forEach((it,i)=>{
+    it.h = ($("#ed-h-"+i)?.value || "").trim();
+    it.t = ($("#ed-t-"+i)?.value || "").trim();
+    const st = $("#ed-s-"+i)?.value || ""; if (st) it.st = st; else delete it.st;
+    if (it.rest){ const r = $("#ed-r-"+i)?.value || ""; const o = ($("#ed-o-"+i)?.value||"").trim();
+      delete it.esc; delete it.outro;
+      if (r==="outro" && o) it.outro = o; else if (r && r!=="outro") it.esc = +r; }
+  });
+  ED.nota = ($("#ed-nota")?.value || "").trim();
+}
+function desenharEditor(){
+  const rows = ED.itens.map((it,i)=>`<div class="ed-item">
+    <label class="campo">Hora<input class="inp num" id="ed-h-${i}" value="${esc(it.h||"")}" placeholder="20h00"></label>
+    <label class="campo">Atividade<input class="inp" id="ed-t-${i}" value="${esc(it.t)}"></label>
+    ${it.rest?`<label class="campo full">Restaurante<select class="inp" id="ed-r-${i}"><option value="">A definir (mostrar opções)</option>${it.rest.map(n=>`<option value="${n}" ${it.esc==n&&!it.outro?"selected":""}>${esc(REST[n].nome)}</option>`).join("")}<option value="outro" ${it.outro?"selected":""}>Outro</option></select></label>
+    <label class="campo full">Outro restaurante<input class="inp" id="ed-o-${i}" value="${esc(it.outro||"")}" placeholder="Nome, se escolheu outro"></label>`:""}
+    <label class="campo">Situação<select class="inp" id="ed-s-${i}"><option value="">Previsto</option><option value="feito" ${it.st==="feito"?"selected":""}>Feito</option><option value="cancelado" ${it.st==="cancelado"?"selected":""}>Cancelado</option></select></label>
+    <div style="display:flex;align-items:flex-end;justify-content:flex-end"><button type="button" class="btn peq alerta" data-act="ed-rem" data-i="${i}">Remover</button></div>
+  </div>`).join("");
+  $("#dlg-in").innerHTML = `<h3>${esc(ED.titulo)}</h3>
+    <p class="sec" style="font-size:.88rem">Hora no formato 20h00. Os itens são ordenados pela hora ao salvar.</p>
+    ${rows}
+    <div><button type="button" class="btn" data-act="ed-add">Incluir atividade</button></div>
+    <label class="campo">Nota para o grupo<textarea class="inp" id="ed-nota" rows="2" placeholder="Ex.: encontro no saguão às 8h45">${esc(ED.nota)}</textarea></label>
+    <div class="acoes" style="justify-content:flex-end"><button type="button" class="btn" data-act="ed-cancel">Cancelar</button><button type="button" class="btn pri" data-act="ed-save">Salvar</button></div>`;
+}
+
+/* ===================== EVENTOS ===================== */
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act;
+  if (a!=="desfazer" && a!=="delgasto") S.confirmar = null;
+  if (a==="tab"){ S.tab = b.dataset.v; render(); window.scrollTo(0,0); return; }
+  if (a==="dia"){ S.dia = b.dataset.v; render(); return; }
+  if (a==="lug"){ S.lug = b.dataset.v; render(); return; }
+  if (a==="lugf"){ S.lugFiltro = b.dataset.v; render(); return; }
+  if (a==="sim"){
+    const d = $("#sim-dia").value, t = /^(\d{2}):(\d{2})/.exec($("#sim-hora").value || "");
+    if (!t){ toast("Informe a hora."); return; }
+    S.sim = {data:d, min:(+t[1])*60 + (+t[2])}; S.dia = DIAS.find(x=>x.data===d)?.id || S.dia; render(); return;
+  }
+  if (a==="sim-off"){ S.sim = null; S.dia = null; render(); return; }
+  if (!S.owner || !S.db) { if (!a.startsWith("ed-")) { toast("Só o organizador altera a programação."); return; } }
+  if (a==="feito") return alterarItem(b.dataset.slot, +b.dataset.i, it => { if (it.st==="feito") delete it.st; else it.st = "feito"; });
+  if (a==="esc") return alterarItem(b.dataset.slot, +b.dataset.i, it => { delete it.outro; it.esc = (it.esc == b.dataset.v) ? undefined : +b.dataset.v; if (!it.esc) delete it.esc; });
+  if (a==="editar") return abrirEditor(b.dataset.slot);
+  if (a==="desfazer"){
+    const k = "desf-"+b.dataset.slot;
+    if (S.confirmar !== k){ S.confirmar = k; render(); return; }
+    S.confirmar = null;
+    try { await S.db.doc("ajustes/"+b.dataset.slot).delete(); toast("Período voltou ao roteiro original"); } catch(err){ toast("Não foi possível desfazer: "+(err?.message||"erro")); }
+    return;
+  }
+  if (a==="chuva"){
+    const on = !S.dias[b.dataset.dia]?.chuva;
+    try { await S.db.doc("dias/"+b.dataset.dia).set({chuva:on, em:new Date().toISOString()}); toast(on?"Plano de chuva aplicado":"Plano normal restaurado"); } catch(err){ toast("Não foi possível salvar: "+(err?.message||"erro")); }
+    return;
+  }
+  if (a==="delgasto"){
+    const k = "g-"+b.dataset.id;
+    if (S.confirmar !== k){ S.confirmar = k; render(); return; }
+    S.confirmar = null;
+    try { await S.db.doc("gastos/"+b.dataset.id).delete(); toast("Gasto excluído"); } catch(err){ toast("Não foi possível excluir: "+(err?.message||"erro")); }
+    return;
+  }
+  if (a==="ed-add"){ lerEditor(); ED.itens.push({h:"",t:""}); desenharEditor(); return; }
+  if (a==="ed-rem"){ lerEditor(); ED.itens.splice(+b.dataset.i,1); desenharEditor(); return; }
+  if (a==="ed-cancel"){ $("#dlg").close(); ED = null; return; }
+  if (a==="ed-save"){
+    lerEditor();
+    const itens = ED.itens.filter(it => it.t);
+    if (ED.itens.some(it => it.h && minDe(it.h)==null)){ toast("Use a hora no formato 20h00."); return; }
+    const sid = ED.sid, nota = ED.nota;
+    $("#dlg").close(); ED = null;
+    await gravarSlot(sid, itens, nota);
+  }
+});
+
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "f-gasto") return;
+  e.preventDefault();
+  if (!S.owner || !S.db) return;
+  const valor = parseValor($("#g-valor").value);
+  const desc = $("#g-desc").value.trim();
+  if (!(valor > 0)){ toast("Informe o valor, por exemplo 125,50."); return; }
+  if (!desc){ toast("Informe a descrição."); return; }
+  const g = {data:$("#g-data").value, valor, desc, cat:$("#g-cat").value, rateio:$("#g-rat").value, em:new Date().toISOString()};
+  try { await S.db.collection("gastos").add(g); $("#g-valor").value=""; $("#g-desc").value=""; toast("Gasto lançado: "+brl(valor)); }
+  catch(err){ toast("Não foi possível lançar: "+(err?.code==="quota_exceeded" ? "limite de registros atingido" : err?.message||"erro")); }
+});
+
+window.addEventListener("hashchange", render);
+setInterval(()=>{ if (S.tab==="hoje" && !$("#dlg").open && !document.querySelector("#view details[open]")) render(); }, 60000);
+
+/* ===================== INICIALIZAÇÃO ===================== */
+render();
+(async () => {
+  if (ESTATICO){ S.aj = ESTATICO.aj || {}; S.dias = ESTATICO.dias || {}; S.gastos = ESTATICO.gastos || []; S.dbStatus = "estatico"; render(); return; }
+  if (!window.claude?.use){ S.dbStatus = "off"; render(); return; }
+  const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+  S.owner = user ? await user.isOwner() : false;
+  if (!db){ S.dbStatus = "off"; S.owner = false; render(); return; }
+  S.db = db; S.dbStatus = "on";
+  const falha = err => { if (err?.code!=="unavailable") { S.dbStatus = "off"; S.owner = false; render(); } };
+  db.collection("ajustes").onSnapshot(snap => { const m = {}; snap.docs.forEach(d => m[d.id] = d.data()); S.aj = m; if (!$("#dlg").open) render(); }, falha);
+  db.collection("dias").onSnapshot(snap => { const m = {}; snap.docs.forEach(d => m[d.id] = d.data()); S.dias = m; if (!$("#dlg").open) render(); }, falha);
+  db.collection("gastos").onSnapshot(snap => { S.gastos = snap.docs.map(d => ({id:d.id, ...d.data()})); if (!$("#dlg").open) render(); }, falha);
+  render();
+})();
+</script>
+</body></html>
