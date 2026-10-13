@@ -192,8 +192,8 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
 <div class="toast" id="toast" hidden></div>
 
 <script>
-/* ===================== DADOS DO ROTEIRO (AF_LAST_Roteiro_Gramado, 12/10/2026) ===================== */
-const ESTATICO = {"aj":{},"dias":{},"gastos":[],"quando":"12/10/2026 às 00h18","semGastos":true};
+/* ===================== DADOS DO ROTEIRO (AF_LASTEST_Roteiro_Gramado, 13/10/2026) ===================== */
+const ESTATICO = {"aj":{},"dias":{},"gastos":[],"quando":"13/10/2026 às 16h02","semGastos":true};
 const PER = {manha:"Manhã", tarde:"Tarde", noite:"Noite"};
 const PER_MIN = {manha:9*60, tarde:13*60, noite:19*60};
 
@@ -203,20 +203,20 @@ const DIAS = [
   tarde:{itens:[{h:"15h30",t:"Voo G3 2090, Galeão → Porto Alegre, chegada às 17h40"}], desl:"Voo direto, 2h10", custo:"Já contratado", seg:"Aeroporto Salgado Filho: moderado", obs:"Ir direto ao ponto de encontro do transfer e recusar ofertas de táxi ou motorista."},
   noite:{itens:[{h:"17h40",t:"Pouso e transfer em van até o hotel"},{h:"20h30",t:"Check-in no Bavária Sport Hotel (horário estimado)"},{h:"21h00",t:"Jantar",rest:[1,2]}], desl:"Van contratada, cerca de 2h; depois aplicativo, 2 carros, 3 min", custo:"Transfer já contratado; jantar R$ 499,50 a R$ 912,00; aplicativo a partir de R$ 60,00", seg:"Estrada à noite: baixo; centro: moderado", obs:"A Cantina Di Capo serve até 23h30."}
  }},
- {id:"d02", data:"2026-11-02", sem:"Seg", tit:"Finados, caminhada e Acendimento", slots:{
-  manha:{itens:[{h:"",t:"Caminhada fotográfica: Lago Negro, Rua Coberta e Praça das Etnias"}], desl:"A pé: 19 min até o lago e cerca de 1 km até o centro", custo:"R$ 0,00", seg:"Baixo", obs:"Feriado de Finados. Luz de amanhecer no lago entre 05h30 e 07h00."},
-  tarde:{itens:[{h:"12h00",t:"Almoço",rest:[3,4]},{h:"",t:"Descanso no hotel"}], desl:"A pé, 15 min até o Alecrim Santo; volta de aplicativo", custo:"Almoço R$ 200,00 a R$ 400,00; aplicativo a partir de R$ 30,00", seg:"Baixo", obs:"Funcionamento no feriado não confirmado. Os dois abriam das 11h30 às 14h30 em 12/10, também feriado."},
-  noite:{itens:[{h:"19h00",t:"Jantar",rest:[5,6]},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"}], desl:"Aplicativo, 2 carros, 3 min; Palácio a pé", custo:"Jantar R$ 300,00 a R$ 1.000,00; Acendimento R$ 0,00; aplicativo a partir de R$ 60,00", seg:"Centro: moderado à noite", obs:"Em 12/10, feriado, o Gaúcho Grill abria até 21h00 e o Gramado & Brasa até 23h00."}
+ {id:"d02", data:"2026-11-02", sem:"Seg", tit:"Lago Negro, BusTour e Acendimento", slots:{
+  manha:{itens:[{h:"10h00",t:"Caminhada fotográfica: Lago Negro, Rua Coberta e Praça das Etnias"}], desl:"A pé: 19 min até o lago e cerca de 1 km até o centro", custo:"R$ 0,00", seg:"Baixo", obs:"Feriado de Finados."},
+  tarde:{itens:[{h:"12h30",t:"Almoço",rest:[3,4]},{h:"14h00",t:"BusTour até 18h00, embarque e desembarque livres entre Gramado e Canela"}], desl:"A pé até o almoço; embarque do BusTour na Brocker Turismo, Av. das Hortênsias, 1845, ou nos fundos da Praça das Etnias", custo:"Almoço R$ 200,00 a R$ 400,00; BusTour R$ 420,00 (referência)", seg:"Baixo", obs:"Funcionamento no feriado não confirmado. Os dois abriam das 11h30 às 14h30 em 12/10, também feriado."},
+  noite:{itens:[{h:"19h00",t:"Jantar",rest:[5,6]},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"}], desl:"Do desembarque do BusTour ao restaurante, a pé ou aplicativo, tempo não medido; Palácio a pé; volta de aplicativo, 2 carros, 3 min", custo:"Jantar R$ 300,00 a R$ 1.000,00; Acendimento R$ 0,00; aplicativo a partir de R$ 60,00", seg:"Centro: moderado à noite", obs:"Em 12/10, feriado, o Gaúcho Grill abria até 21h00 e o Gramado & Brasa até 23h00."}
  }},
  {id:"d03", data:"2026-11-03", sem:"Ter", tit:"Alpen Park e Canela", slots:{
   manha:{itens:[{h:"09h00",t:"Alpen Park, em Canela, até 13h00"}], desl:"Aplicativo, 2 carros, 18 min", custo:"Passaporte R$ 446,70 para os três de 1,30 m (referência); aplicativo a partir de R$ 120,00", seg:"Baixo de dia", obs:"Troca do voucher até as 14h00. Os avós acompanham sem passaporte."},
   tarde:{itens:[{h:"13h30",t:"Almoço em Canela",rest:[7,8]},{h:"",t:"Catedral de Pedra e centro de Canela até o pôr do sol"}], desl:"Aplicativo, 2 carros, 10 min desde o Alpen Park", custo:"Almoço R$ 200,00 a R$ 1.000,00; Catedral R$ 0,00; aplicativo a partir de R$ 60,00", seg:"Baixo de dia", obs:"Melhor luz para fotos na Catedral: 17h30 às 18h45."},
   noite:{itens:[{h:"20h30",t:"Jantar",rest:[13,6]}], desl:"Aplicativo, 2 carros, Canela → hotel, 14 min; depois 3 min", custo:"Jantar R$ 100,00 a R$ 1.000,00; aplicativo a partir de R$ 120,00", seg:"Centro: moderado à noite", obs:"Famiglia Guimarães, Chama de Fogo e La Braise fecham às terças."}
  }},
- {id:"d04", data:"2026-11-04", sem:"Qua", tit:"Jolimont, Felsen e Hector", slots:{
+ {id:"d04", data:"2026-11-04", sem:"Qua", tit:"Jolimont e Felsen", slots:{
   manha:{itens:[{h:"10h00",t:"Tour Jolimont, na Vinícola Jolimont, em Canela (só os pais; agendamento prévio)"}], desl:"Aplicativo, 1 carro, 23 min", custo:"Tour R$ 298,00 para 2 adultos; aplicativo a partir de R$ 60,00", seg:"Baixo de dia", obs:"A adolescente fica com os avós no hotel. Duração não confirmada: confirmar no agendamento."},
   tarde:{itens:[{h:"12h30",t:"Almoço",rest:[10,23]},{h:"15h00",t:"Cervejaria Felsen, Beer Tour (só os pais)"}], desl:"Aplicativo, 2 carros, 10 min até a Casa Figueira; 1 carro, 9 min até a Felsen", custo:"Almoço R$ 400,00 a R$ 625,00; Beer Tour R$ 158,00 para 2 adultos; aplicativo a partir de R$ 90,00", seg:"Baixo de dia", obs:"A Casa Figueira serve só até 13h30. A adolescente não vai a cervejarias."},
-  noite:{itens:[{h:"18h30",t:"Palco Rua Coberta"},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"},{h:"20h45",t:"Jantar",rest:[22]}], desl:"Ida a pé, 21 min; Hector a pé desde o Palácio; volta de aplicativo, 2 carros, 3 min", custo:"Programação R$ 0,00; Hector R$ 1.449,50; aplicativo a partir de R$ 30,00", seg:"Centro: moderado à noite", obs:"Hector: sessão das 20h45, com reserva antecipada."}
+  noite:{itens:[{h:"18h30",t:"Palco Rua Coberta"},{h:"20h00",t:"Show de Acendimento, Palácio dos Festivais"},{h:"20h30",t:"Jantar",rest:[11,12]}], desl:"Ida a pé, 21 min; do Palácio ao restaurante, a pé ou aplicativo, tempo não medido; volta de aplicativo, 2 carros, 3 min", custo:"Programação R$ 0,00; jantar R$ 500,00 a R$ 1.000,00; aplicativo a partir de R$ 60,00", seg:"Centro: moderado à noite", obs:"As duas abrem às quartas a partir das 19h00; a Famiglia vende reserva antecipada no site."}
  }},
  {id:"d05", data:"2026-11-05", sem:"Qui", tit:"NBA Park e Nativitaten", slots:{
   manha:{itens:[{h:"10h00",t:"NBA Park, até 12h15: a adolescente e os avós. Os pais ficam livres"}], desl:"Aplicativo, 1 carro, 8 min", custo:"Ingressos R$ 373,50; aplicativo a partir de R$ 30,00", seg:"Baixo de dia", obs:"Menor de 16 anos só entra acompanhado de responsável maior de 18."},
@@ -224,14 +224,14 @@ const DIAS = [
   noite:{itens:[{h:"20h00",t:"Nativitaten, no Serra Park"},{h:"21h30",t:"Jantar",rest:[15,2]}], desl:"Aplicativo, 2 carros: hotel → Serra Park, 9 min; Serra Park → restaurante, 7 a 8 min; restaurante → hotel, 3 min", custo:"Nativitaten R$ 1.260,00; jantar R$ 602,00 a R$ 912,00; aplicativo a partir de R$ 90,00", seg:"Moderado na saída do espetáculo", obs:"Espetáculo ao ar livre: levar agasalho."}
  }},
  {id:"d06", data:"2026-11-06", sem:"Sex", tit:"Parque Olivas e fondue", slots:{
-  manha:{itens:[{h:"",t:"Tempo livre; piscinas e spa do hotel"}], obs:"Período reserva para chuva."},
-  tarde:{itens:[{h:"14h00",t:"Parque Olivas de Gramado, com piquenique, até 18h00"}], desl:"Aplicativo, 2 carros, 25 min", custo:"Ingressos R$ 521,50; piquenique R$ 625,00 (estimativa); aplicativo a partir de R$ 120,00", seg:"Baixo de dia", obs:"O parque fecha às 18h00 e o sol se põe por volta das 18h47. Confirmar se há evento Sunset com horário estendido: (54) 99610-7626."},
+  manha:{itens:[{h:"10h00",t:"Adega Cavicchioni, programa dos adultos"}], desl:"A pé, 1,4 km, 19 min", custo:"Entrada R$ 0,00", seg:"Baixo de dia", obs:"A adolescente não degusta: idade mínima de 18 anos."},
+  tarde:{itens:[{h:"14h00",t:"Parque Olivas de Gramado, até 18h00, com piquenique às 14h00"}], desl:"Aplicativo, 2 carros, 25 min", custo:"Ingressos R$ 521,50; piquenique R$ 625,00 (estimativa); aplicativo a partir de R$ 120,00", seg:"Baixo de dia", obs:"O parque fecha às 18h00 e o sol se põe por volta das 18h47. Confirmar se há evento Sunset com horário estendido: (54) 99610-7626."},
   noite:{itens:[{h:"21h00",t:"Jantar de fondue",rest:[24,25,26]}], desl:"Aplicativo, 2 carros: Olivas → hotel, 25 min; hotel → restaurante, 4 min", custo:"Jantar R$ 500,00 a R$ 1.000,00; aplicativo a partir de R$ 150,00", seg:"Centro: moderado à noite", obs:"O Castelo Landelom tem sessão fixa às 21h00; os outros dois atendem sem hora marcada."}
  }},
- {id:"d07", data:"2026-11-07", sem:"Sáb", tit:"Parada, Brilho do Natal e despedida", slots:{
-  manha:{itens:[{h:"",t:"Tempo livre e compras no centro"}], desl:"A pé, 21 min", custo:"R$ 0,00", seg:"Baixo", obs:"Reserva para a caminhada, se chover em 02/11."},
+ {id:"d07", data:"2026-11-07", sem:"Sáb", tit:"Natal Luz e Hector", slots:{
+  manha:{itens:[{h:"09h15",t:"Compras no centro, com a Budegas Queijos Vinhos e Facas"},{h:"11h30",t:"Palco Rua Coberta"}], desl:"A pé, 23 min até a Budegas", custo:"R$ 0,00", seg:"Baixo", obs:"Reserva para a caminhada, se chover em 02/11."},
   tarde:{itens:[{h:"12h30",t:"Almoço",rest:[16,17]},{h:"15h00",t:"Parada de Natal, Av. Borges de Medeiros"},{h:"18h00",t:"O Brilho do Natal, Palácio dos Festivais"}], desl:"A pé no centro; volta de aplicativo, 2 carros, 3 min", custo:"Almoço R$ 249,50 a R$ 500,00; Parada R$ 0,00; Brilho R$ 420,00; aplicativo a partir de R$ 30,00", seg:"Centro: moderado ao anoitecer", obs:"A Parada passa pela Av. Borges de Medeiros."},
-  noite:{itens:[{h:"19h30",t:"Jantar de despedida",rest:[11,6]}], desl:"A pé desde o Palácio; volta de aplicativo, 2 carros, 3 min", custo:"Jantar R$ 500,00 a R$ 1.000,00; aplicativo a partir de R$ 30,00", seg:"Centro: moderado à noite", obs:"Dormir cedo por causa da partida."}
+  noite:{itens:[{h:"19h45",t:"Jantar de despedida com espetáculo",rest:[22]}], desl:"A pé desde o Palácio; volta de aplicativo, 2 carros, 3 min", custo:"Hector R$ 1.449,50; aplicativo a partir de R$ 30,00", seg:"Centro: moderado à noite", obs:"Espetáculo no andar superior, com escadas. Reserva antecipada. Dormir cedo por causa da partida."}
  }},
  {id:"d08", data:"2026-11-08", sem:"Dom", tit:"Volta", slots:{
   manha:{itens:[{h:"07h30",t:"Café, check-out e transfer ao aeroporto (horário estimado)"},{h:"11h00",t:"Voo Porto Alegre → Guarulhos, chegada às 12h45"}], desl:"Van contratada, cerca de 2h", custo:"Já contratado", seg:"Estrada de dia: baixo", obs:"Conferir no balcão da GOL se a bagagem segue direto até Aracaju."},
@@ -241,10 +241,10 @@ const DIAS = [
 ];
 
 const CHUVA = {
- d02:"Chuva na manhã: trocar a caminhada por O Brilho do Natal das 15h00, em local coberto, e passar a caminhada para 07/11.",
- d03:"Com chuva o Alpen Park suspende as atrações externas. Antecipar o NBA Park, que é coberto, e passar o Alpen Park para a manhã de 06/11. A Catedral de Pedra é visita interna e se mantém.",
- d04:"A visita à Jolimont é em ambiente coberto e se mantém. À noite, o Palco Rua Coberta funciona sob cobertura, e o Show de Acendimento pode ser trocado por jantar mais cedo na Hector.",
- d05:"O Nativitaten é ao ar livre. Passá-lo para 07/11 às 20h00 e antecipar O Brilho do Natal para 07/11 às 15h00; nesse caso, a Parada de Natal sai.",
+ d02:"Chuva na manhã: a caminhada passa para a manhã de 07/11, junto com as compras no centro. O BusTour da tarde é coberto e se mantém.",
+ d03:"Com chuva o Alpen Park suspende as atrações externas. Trocar pelo Big Land, parque coberto de brinquedos gigantes no centro de Canela. O horário diverge: 9h00 às 17h00 no roteiro do organizador, 13h00 às 19h00 nas fontes; conferir antes. A Catedral de Pedra é visita interna e se mantém.",
+ d04:"A visita à Jolimont é em ambiente coberto e se mantém. À noite, o Palco Rua Coberta funciona sob cobertura, e o Show de Acendimento pode ser trocado por jantar mais cedo na Famiglia Guimarães ou na Chama de Fogo, que abrem às 19h00.",
+ d05:"O Nativitaten é ao ar livre. Trocar as noites: Nativitaten em 07/11 às 20h00 e Hector hoje, espetáculo das 21h00, no lugar do jantar. O Brilho do Natal de 07/11 passa para as 15h00, e a Parada de Natal sai.",
  d06:"Chuva à tarde: o Olivas tem trilhas e mirantes abertos. Trocar pela Azeiteria e pela Trattoria, que são cobertas, ou passar o parque para a manhã de 07/11."
 };
 
@@ -261,18 +261,18 @@ const REST = {
  9:{nome:"Cantina Linha Bella",end:"Estrada Linha Bonita, 4250, zona rural de Gramado",coz:"Italiana colonial, almoço temático rural",preco:"R$ 99,00 preço fixo. Grupo R$ 495,00",nota:"4,8",av:"1.935",pratos:"Almoço da casa; sagu de uva com creme",res:"Sim, pelo site",hor:"Almoço às segundas, quartas, sextas e sábados",esc:0},
  10:{nome:"Casa Figueira",end:"Estrada Serra Grande, 3945, Várzea Grande, Gramado",coz:"Buffet caseiro com vista da serra",preco:"R$ 80,00 a R$ 100,00 por pessoa. Grupo R$ 400,00 a R$ 500,00",nota:"4,6",av:"1.445",pratos:"Buffet caseiro; vale e horta própria",res:"Não informada",hor:"Terça a sábado, 11h00 às 13h30; fecha aos domingos",esc:1,melhor:1},
  11:{nome:"Famiglia Guimarães",end:"Rua Wilma Dinnebier, 91, Centro, Gramado",coz:"Italiana, cantina",preco:"R$ 100,00 a R$ 200,00 por pessoa. Grupo R$ 500,00 a R$ 1.000,00",nota:"4,7",av:"1.902",pratos:"Risoto da Nona, com linguiça colonial, R$ 159,90; Talharim ao Molho Pepe R$ 169,90",res:"Compra antecipada no site",hor:"Fecha às terças; demais dias 11h30 às 15h30 e 19h00 às 23h00",esc:1},
- 12:{nome:"Churrascaria Chama de Fogo",end:"Av. Borges de Medeiros, 1350, Planalto, Gramado",coz:"Churrasco gaúcho, cortes Angus",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,7",av:"5.022",pratos:"Cortes Angus no espeto; buffet de saladas",res:"Não informada",hor:"Fecha às terças",esc:0},
+ 12:{nome:"Churrascaria Chama de Fogo",end:"Av. Borges de Medeiros, 1350, Planalto, Gramado",coz:"Churrasco gaúcho, cortes Angus",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,7",av:"5.022",pratos:"Cortes Angus no espeto; buffet de saladas",res:"Não informada",hor:"Fecha às terças; às quartas abre a partir das 19h00",esc:1},
  13:{nome:"Massita Massas e Risotos",end:"Rua Senador Salgado Filho, 295, Centro, Gramado",coz:"Italiana, massas e risotos",preco:"R$ 20,00 a R$ 40,00 por pessoa. Grupo R$ 100,00 a R$ 200,00",nota:"4,8",av:"206",pratos:"Massa com molho de carne",res:"Não informada",hor:"Todos os dias, 11h00 às 22h00",esc:1},
- 14:{nome:"Roma Cucina Italiana",end:"Av. Borges de Medeiros, 3150A, Centro, Gramado",coz:"Italiana clássica",preco:"Não confirmado",nota:"4,8",av:"149",pratos:"Bruschetta; tiramisù",res:"Reserva por WhatsApp",hor:"Todos os dias, 11h30 às 23h00",esc:1},
- 15:{nome:"Churrascaria Gramadense",end:"Rua Mário Bertoluci, 99, Centro, Gramado",coz:"Rodízio gaúcho",preco:"Não confirmado",nota:"4,9",av:"7.740",pratos:"Picanha no rodízio",res:"Aceita reserva",hor:"Fecha às quartas; quinta 11h30 às 23h00",esc:1},
+ 14:{nome:"Roma Cucina Italiana",end:"Av. Borges de Medeiros, 3150A, Centro, Gramado",coz:"Italiana clássica",preco:"Não confirmado; grupo R$ 625,00 por estimativa",nota:"4,8",av:"149",pratos:"Bruschetta; tiramisù",res:"Reserva por WhatsApp",hor:"Todos os dias, 11h30 às 23h00",esc:1},
+ 15:{nome:"Churrascaria Gramadense",end:"Rua Mário Bertoluci, 99, Centro, Gramado",coz:"Rodízio gaúcho",preco:"Não confirmado; grupo R$ 625,00 por estimativa",nota:"4,9",av:"7.740",pratos:"Picanha no rodízio",res:"Aceita reserva",hor:"Fecha às quartas; quinta 11h30 às 23h00",esc:1},
  16:{nome:"Restaurante Serra Grill",end:"Rua São Pedro, 567, Centro, Gramado",coz:"Buffet livre e a quilo, com grelhados",preco:"R$ 80,00 a R$ 100,00 por pessoa. Grupo R$ 400,00 a R$ 500,00",nota:"4,5",av:"2.591",pratos:"Grelhados do buffet",res:"Não informada",hor:"Todos os dias, 11h30 às 15h00",esc:1},
  17:{nome:"Bifê Gramado",end:"Av. Borges de Medeiros, 3434, Centro, Gramado",coz:"Buffet livre",preco:"R$ 49,90 com sobremesa. Grupo R$ 249,50",nota:"4,9",av:"191",pratos:"Buffet com sobremesa",res:"Não informada",hor:"Horário não confirmado",esc:1},
  18:{nome:"Carne&Osso Steakhouse",end:"Av. das Hortênsias, 5530, entre Gramado e Canela",coz:"Steakhouse",preco:"Não confirmado; grupo R$ 625,00 por estimativa",nota:"4,5",av:"2.132",pratos:"Baita Steaks; risoto de alho-poró com medalhão",res:"Não informada",hor:"Todos os dias, 11h45 às 22h50",esc:0},
  19:{nome:"La Braise",end:"Rua Leopoldo Rosenfeld, 986, Centro, Gramado",coz:"Parrilla",preco:"Não confirmado",nota:"4,6",av:"366",pratos:"Parrilla",res:"Aceita reserva",hor:"Fecha às terças; demais dias 12h00 às 22h00",esc:0},
  20:{nome:"Restaurante Bêrga Mótta",end:"Estrada Profa. Elvira A. Benetti, km 5, Vale do Quilombo, Canela",coz:"Comida caseira em parque ecológico",preco:"Acima de R$ 200,00 por pessoa",nota:"4,6",av:"1.454",pratos:"Costelão 12 horas",res:"Não aceita reserva",hor:"Só sábados e domingos, 11h30 às 15h00",esc:0},
  21:{nome:"Restaurante Carazal",end:"Rua Germano Boff, Parque Tomasini, Gramado",coz:"Buffet colonial, forno a lenha",preco:"R$ 60,00 a R$ 80,00 por pessoa. Grupo R$ 300,00 a R$ 400,00",nota:"4,4",av:"1.667",pratos:"Pratos de forno a lenha",res:"Não informada",hor:"Terça a domingo, 11h40 às 15h00",esc:0},
- 22:{nome:"Hector Pizzaria",end:"Av. Borges de Medeiros, 1791, Centro, Gramado",coz:"Pizzaria temática, rodízio",preco:"R$ 289,90 por pessoa até a véspera; R$ 349,90 no dia. Grupo R$ 1.449,50",nota:"4,7",av:"7.758",pratos:"Rodízio de discos de sabor, com show de magia e personagens",res:"Sim, mesa e horário. (54) 99688-5995",hor:"Domingo a quinta 18h15 e 20h45; sexta e sábado 17h20, 19h20 e 21h40",esc:1},
- 23:{nome:"Casa Lovatto & Sartori",end:"Rua Euzébio Balzaretti, 557, Centro, Gramado",coz:"Mercearia italiana de família, tábuas",preco:"Não confirmado. (54) 3286-3030",nota:"5,0",av:"147",pratos:"Tábuas de frios e embutidos da casa",res:"Não informada",hor:"Quarta e quinta 12h00 às 21h00; sexta e sábado 9h00 às 21h00",esc:1},
+ 22:{nome:"Hector Pizzaria",end:"Av. Borges de Medeiros, 1791, Centro, Gramado",coz:"Pizzaria temática, rodízio",preco:"R$ 289,90 por pessoa até a véspera; R$ 349,90 no dia. Grupo R$ 1.449,50",nota:"4,7",av:"7.758",pratos:"Rodízio de discos de sabor, com show de magia e personagens",res:"Sim, mesa e horário. (54) 99688-5995; confirmar o acesso dos avós ao andar superior",hor:"Espetáculo com jantar: domingo a quinta 18h00 e 21h00; sexta e sábado 17h05, 19h45 e 22h25, no andar superior, com escadas. Taverna com jantar: domingo a quinta 18h15 e 20h45; sexta e sábado 17h20, 19h20 e 21h40, sem restrição de acesso. Sem sessão às segundas",esc:1},
+ 23:{nome:"Casa Lovatto & Sartori",end:"Rua Euzébio Balzaretti, 557, Centro, Gramado",coz:"Mercearia italiana de família, tábuas",preco:"Não confirmado; grupo R$ 625,00 por estimativa. (54) 3286-3030",nota:"5,0",av:"147",pratos:"Tábuas de frios e embutidos da casa",res:"Não informada",hor:"Quarta e quinta 12h00 às 21h00; sexta e sábado 9h00 às 21h00; domingo 9h00 às 12h00",esc:1},
  24:{nome:"Fondue Castelo Landelom",end:"Rua Bela Vista, 05, Centro, Gramado",coz:"Fondue de queijo, carne e chocolate",preco:"R$ 100,00 a R$ 200,00 por pessoa. Grupo R$ 500,00 a R$ 1.000,00",nota:"4,8",av:"11.766",pratos:"Fondue de queijo; sequência de fondue doce",res:"Sim, (54) 99635-4508",hor:"Fecha às terças; sessões 18h00 às 20h00 e 21h00 às 23h00",esc:1,melhor:1},
  25:{nome:"Le Chalet de La Fondue",end:"Av. das Hortênsias, 1297, Centro, Gramado",coz:"Suíça, fondue de carne, queijo e chocolate",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,5",av:"2.051",pratos:"Fondue de carne; fondue de chocolate",res:"Sim, (54) 3286-2474",hor:"Sexta a domingo 11h00 às 23h30; demais dias 16h00 às 23h30",esc:1},
  26:{nome:"Chalezinho Gramado",end:"Av. Borges de Medeiros, 2050, Centro, Gramado",coz:"Europeia, fondue",preco:"Acima de R$ 200,00 por pessoa. Grupo a partir de R$ 1.000,00",nota:"4,4",av:"2.278",pratos:"Fondues e pratos europeus",res:"Sim, (54) 98104-6555",hor:"Todos os dias, 18h00 às 00h00",esc:1}
@@ -292,13 +292,14 @@ const PASS = [
  {nome:"Cervejaria Felsen, Beer Tour",end:"Rua São Marcos, 555, Carniel",hor:"Todos os dias, 10h00 às 18h00",ing:"R$ 79,00",grupo:"R$ 158,00 para 2 adultos",ir:"Aplicativo, 1 carro, 9 min",compra:"Recomendada",esc:1,dia:"04/11"},
  {nome:"Adega Bertolucci",end:"Centro de Gramado",hor:"Terça 10h00 às 18h00; quarta a domingo 10h00 às 20h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,5 km, 20 min",compra:"Não",esc:1,dia:"05/11"},
  {nome:"Dreamland, Museu de Cera",end:"Av. das Hortênsias, 5507",hor:"Terça a domingo, 8h00 às 18h00; segunda não confirmada",ing:"R$ 155,00",grupo:"R$ 775,00",ir:"Aplicativo, 2 carros, 8 min",compra:"Sim, site oficial",esc:0},
- {nome:"BusTour, 1 dia, Gramado a Canela",end:"Brocker Turismo, Av. das Hortênsias, 1845, ou fundos da Praça das Etnias",hor:"Diário, validade até 18h00",ing:"R$ 88,00 de 13 a 59 anos; R$ 78,00 a partir de 60 (referência)",grupo:"R$ 420,00",ir:"O próprio ônibus",compra:"Sim",esc:0},
+ {nome:"BusTour, 1 dia, Gramado a Canela",end:"Brocker Turismo, Av. das Hortênsias, 1845, ou fundos da Praça das Etnias",hor:"Diário, validade até 18h00",ing:"R$ 88,00 de 13 a 59 anos; R$ 78,00 a partir de 60 (referência)",grupo:"R$ 420,00",ir:"O próprio ônibus",compra:"Sim, até 01/11",esc:1,dia:"02/11"},
  {nome:"Le Jardin Parque de Lavanda",end:"RS-115, 37700, Gramado",hor:"Terça a domingo, 9h30 às 17h00; melhor luz 9h30 às 11h00",ing:"R$ 35,00",grupo:"R$ 175,00",ir:"Aplicativo, 2 carros, 8 min",compra:"Não",esc:0},
  {nome:"Noite Italiana, Cantina Linha Bella",end:"Estrada Linha Bonita, 4250",hor:"Conforme disponibilidade",ing:"R$ 295,00 com transfer (referência)",grupo:"R$ 1.475,00",ir:"Aplicativo, 2 carros, 14 min",compra:"Sim, 2 dias antes",esc:0},
  {nome:"Cervejaria Ambarina",end:"Rua São Marcos, 787, Carniel",hor:"Terça a domingo, 10h00 às 19h00",ing:"Não confirmado",grupo:"Não confirmado",ir:"Aplicativo, 1 carro, 9 min",compra:"Não confirmada",esc:0},
  {nome:"Cervejaria Farol, Beer Experience",end:"Rua Severino Inocente Zini, 150, Canela",hor:"Ter, qui, sex e sáb 11h00 às 23h30; dom 11h00 às 17h00; quarta fechada",ing:"R$ 139,00",grupo:"R$ 278,00 para 2 adultos",ir:"Aplicativo, 1 carro, 17 min",compra:"Recomendada",esc:0},
- {nome:"Budegas Queijos Vinhos e Facas",end:"Galeria Dutra, Av. Borges de Medeiros, 2861",hor:"Terça a domingo, a partir de 9h15",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,7 km, 23 min",compra:"Não",esc:0},
- {nome:"Adega Cavicchioni",end:"Av. das Hortênsias, 1409",hor:"Terça a domingo, 10h00 às 20h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,4 km, 19 min",compra:"Não",esc:0},
+ {nome:"Budegas Queijos Vinhos e Facas",end:"Galeria Dutra, Av. Borges de Medeiros, 2861",hor:"Terça a domingo, a partir de 9h15",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,7 km, 23 min",compra:"Não",esc:1,dia:"07/11"},
+ {nome:"Adega Cavicchioni",end:"Av. das Hortênsias, 1409",hor:"Terça a domingo, 10h00 às 20h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"A pé, 1,4 km, 19 min",compra:"Não",esc:1,dia:"06/11"},
+ {nome:"Big Land",end:"Largo Benito Urbani, 77, Estação Campos de Canella, Centro, Canela",hor:"Horário divergente: 9h00 às 17h00 no roteiro do organizador; 13h00 às 19h00 nas fontes. Plano de chuva de 03/11",ing:"R$ 99,90 adulto; R$ 79,90 criança",grupo:"R$ 499,50 para 5 adultos (referência)",ir:"Aplicativo, 2 carros, 14 min",compra:"Venda online disponível",esc:0,alerta:"Indicado sobretudo para crianças de 3 a 10 anos; a fonte avisa que adolescentes podem achar a visita rápida."},
  {nome:"Loja 10 Jolimont",end:"Av. das Hortênsias, 3570",hor:"Terça a domingo, 8h00 às 18h00",ing:"Entrada gratuita",grupo:"R$ 0,00",ir:"Aplicativo, 1 carro, 5 min",compra:"Não",esc:0},
  {nome:"Vinícola Ravanello",end:"Rodovia ERS-235, Gramado",hor:"Terça a sábado, 9h30 às 17h15; domingo fechada",ing:"Não confirmado",grupo:"Não confirmado",ir:"Aplicativo, 1 carro, 9 min",compra:"Não confirmada",esc:0},
  {nome:"Vinícola Jolimont",end:"Estrada Morro Calçado, 1420, Canela",hor:"Terça a domingo, 9h00 às 16h45, visita agendada; no roteiro, às 10h00 de 04/11",ing:"Tour R$ 149,00; Pisa das Uvas R$ 89,00; Piquenique R$ 129,00",grupo:"R$ 298,00 para 2 adultos no Tour (só os pais)",ir:"Aplicativo, 1 carro, 23 min",compra:"Sim, agendamento; duração não publicada",esc:1,dia:"04/11"}
@@ -308,11 +309,11 @@ const PASS = [
 const ORC = {
  cats:[
   {id:"alim", nome:"Alimentação", teto:6000, prev:5429.70},
-  {id:"pass", nome:"Passeios e espetáculos", teto:6000, prev:2599.70},
+  {id:"pass", nome:"Passeios e espetáculos", teto:6000, prev:2863.70},
   {id:"transp", nome:"Transporte local", teto:1000, prev:684.00},
   {id:"outros", nome:"Imprevistos e outros", teto:2000, prev:0}
  ],
- tetoTrio:15000, prevTrio:8713.40, prevAvos:4893.80, prevGrupo:13607.20
+ tetoTrio:15000, prevTrio:8977.40, prevAvos:5049.80, prevGrupo:14027.20
 };
 const RATEIO = {grupo:"Grupo: 3/5 trio, 2/5 avós", trio:"Só o trio", avos:"Só os avós"};
 
@@ -468,11 +469,13 @@ function itemNome(it){ if (!it.rest) return esc(it.t); const r = restTexto(it); 
 
 function prazos(hoje){
   const P = [
-    ["2026-10-21","Comprar na tiqueteira oficial o Nativitaten de 05/11 e O Brilho do Natal de 07/11 às 18h00; levar a CIE válida da adolescente (meia limitada a 40% dos ingressos)."],
+    ["2026-10-21","Comprar na tiqueteira oficial o Nativitaten de 05/11 e O Brilho do Natal de 07/11 às 18h00; conferir se o desconto de 5% vale; levar a CIE válida da adolescente (meia limitada a 40% dos ingressos)."],
     ["2026-10-22","Vacina contra febre amarela para quem não tem a dose; avós com orientação médica."],
+    ["2026-10-25","Revalidação pré-embarque às 08h00, por tarefa agendada que informa só o que mudou."],
     ["2026-10-30","Agendar o Tour Jolimont para 04/11 às 10h00, com 2 adultos, e confirmar a duração."],
-    ["2026-10-30","Reservar a Hector para 04/11 às 20h45 e o fondue de 06/11; ligar aos restaurantes de 02/11 para confirmar o feriado."],
+    ["2026-10-30","Reservar a Hector para 07/11, espetáculo das 19h45, e confirmar o acesso dos avós ao andar superior; reservar no site a Famiglia Guimarães para 04/11 às 20h30, se for a escolha; reservar o fondue de 06/11; ligar aos restaurantes de 02/11 para confirmar o feriado."],
     ["2026-10-31","Confirmar o transfer de 01/11 e 08/11; reservar o Beer Tour da Felsen; confirmar no Olivas o piquenique e o evento Sunset."],
+    ["2026-11-01","Comprar o BusTour de 02/11, para 5 pessoas."],
     ["2026-11-02","Comprar online o Alpen Park de 03/11 e o NBA Park de 05/11."],
     ["2026-11-05","Comprar online o Parque Olivas de 06/11."]
   ].filter(p => p[0] >= hoje);
@@ -611,9 +614,9 @@ function vInfo(){
     <ul class="lista"><li>Novembro em Gramado: mínima de 14 °C, máxima de 23,4 °C, 167 mm de chuva em cerca de 10 dias. Levar agasalho e capa de chuva.</li><li>Sol: nasce às 05h30 e se põe às 18h45 em 01/11; nasce às 05h25 e se põe às 18h50 em 08/11 (estimativa).</li><li>02/11, segunda-feira, é Finados, feriado nacional. O Natal Luz vai de 22/10/2026 a 17/01/2027: alta temporada.</li><li>Taxa de serviço, em geral 10%, é facultativa; o couvert artístico precisa ser informado antes, com o valor.</li></ul>
   </section>
   <section class="card bloco"><h3>Telefones para confirmar</h3>
-    ${tabela(["Local","Telefone","O que confirmar"],[["Parque Olivas",'<span class="fone">(54) 99610-7626</span>',"Evento Sunset e piquenique"],["Alpen Park",'<span class="fone">(54) 3282-9035</span>',"Preço do passaporte; entrada dos avós"],["Hector Pizzaria",'<span class="fone">(54) 99688-5995</span>',"Bebidas e preço para menor"],["Castelo Landelom",'<span class="fone">(54) 99635-4508</span>',"Preço do fondue"],["Le Chalet de La Fondue",'<span class="fone">(54) 3286-2474</span>',"Preço do fondue"],["Chalezinho",'<span class="fone">(54) 98104-6555</span>',"Preço do fondue"],["Vinícola Jolimont","Painel de reservas da vinícola","Duração do tour e vaga em 04/11 às 10h00"],["Casa Lovatto & Sartori",'<span class="fone">(54) 3286-3030</span>',"Preço do almoço"]])}
+    ${tabela(["Local","Telefone","O que confirmar"],[["Parque Olivas",'<span class="fone">(54) 99610-7626</span>',"Evento Sunset e piquenique"],["Alpen Park",'<span class="fone">(54) 3282-9035</span>',"Preço do passaporte; entrada dos avós"],["Hector Pizzaria",'<span class="fone">(54) 99688-5995</span>',"Bebidas, preço para menor e acesso dos avós ao andar superior"],["Castelo Landelom",'<span class="fone">(54) 99635-4508</span>',"Preço do fondue"],["Le Chalet de La Fondue",'<span class="fone">(54) 3286-2474</span>',"Preço do fondue"],["Chalezinho",'<span class="fone">(54) 98104-6555</span>',"Preço do fondue"],["Vinícola Jolimont","Painel de reservas da vinícola","Duração do tour e vaga em 04/11 às 10h00"],["Casa Lovatto & Sartori",'<span class="fone">(54) 3286-3030</span>',"Preço do almoço"]])}
   </section>
-  <p class="sec" style="font-size:.82rem">Fonte: roteiro de 12/10/2026 (AF_LAST_Roteiro_Gramado), com preços pesquisados em 09/10/2026. Revalidar antes da compra.</p>
+  <p class="sec" style="font-size:.82rem">Fonte: roteiro de 13/10/2026 (AF_LASTEST_Roteiro_Gramado), com preços pesquisados em 09/10/2026 e inclusões de 11/10 e 13/10/2026. Revalidar antes da compra.</p>
   </div>`;
 }
 
@@ -737,4 +740,5 @@ render();
   render();
 })();
 </script>
+
 </body></html>
